@@ -11,7 +11,7 @@
 	<key>CFBundleIconFile</key>
 	<string>PackageAssistant.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.freemac.PackageAssistant</string>
+	<string>com.sourapple.PackageAssistant</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
