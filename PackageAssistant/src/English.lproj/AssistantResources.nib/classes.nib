@@ -1,0 +1,39 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {refresh = id; }; 
+            CLASS = MainController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                detailsTable = NSTableView; 
+                mainWindow = NSWindow; 
+                packageAssistant = PackageAssistant; 
+                packagesController = NSArrayController; 
+                packagesTable = NSTableView; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {CLASS = Package; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = PackageAssistant; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {CLASS = PackageDependency; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {cancel = id; check = id; remove = id; }; 
+            CLASS = SheetController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                closeButton = NSButton; 
+                mainWindow = NSWindow; 
+                packageAssistant = PackageAssistant; 
+                packageLabel = NSTextField; 
+                packagesController = NSArrayController; 
+                packagesTable = id; 
+                progress = NSProgressIndicator; 
+                sheet = NSPanel; 
+                titleLabel = NSTextField; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }
+    ); 
+    IBVersion = 1; 
+}
