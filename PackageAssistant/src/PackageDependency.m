@@ -48,7 +48,7 @@
 - (void)setFilename:(NSString*)name
 {
     [_filename autorelease];
-    _filename = [name retain];
+    _filename = [[NSString alloc] initWithString: [name substringFromIndex:1]];
 }
 
 @end

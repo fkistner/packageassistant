@@ -1,6 +1,3 @@
-#import <Security/Authorization.h>
-#include <Security/AuthorizationTags.h>
-
 #import "Package.h"
 #import "MainController.h"
 #import "PackageStateTransformer.h"
@@ -74,7 +71,7 @@
 
 - (IBAction)refresh:(id)sender
 {
-    [packagesController setContent:[packageAssistant listPackages]];
+    [packagesController setContent:[PackageAssistant listPackages]];
 }
 
 // tableView
@@ -94,11 +91,11 @@
             [[packagesController selectedObjects] objectAtIndex:0];
             
         // get the package's dependencies
-        NSArray *deps = [packageAssistant getPackageDependencies:
+        NSArray *deps = [PackageAssistant getPackageDependencies:
                 [_lastSelectedPackage name]];
 
         // check them
-        [packageAssistant checkDependencies:deps];
+        [PackageAssistant checkDependencies:deps fast:false];
     
         // load package's dependencies
         [_lastSelectedPackage setDependencies:deps];
@@ -109,7 +106,8 @@
 
 - (NSPredicate*)tableFilter
 {
-    return [NSPredicate predicateWithFormat:@"state = %d", _filter];
+    //return [NSPredicate predicateWithFormat:@"state = %d", _filter];
+    return [NSPredicate predicateWithFormat:@"1 = 1"];
 }
 
 @end

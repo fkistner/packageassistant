@@ -9,7 +9,6 @@
     IBOutlet NSPanel *sheet;
     IBOutlet NSTableView *packagesTable;
     IBOutlet NSButton *closeButton;
-    IBOutlet PackageAssistant *packageAssistant;
     IBOutlet NSWindow *mainWindow;
     IBOutlet NSArrayController *packagesController;
     IBOutlet NSTextField *packageLabel;
@@ -27,7 +26,7 @@
 - (IBAction)cancel:(id)sender;
 - (IBAction)remove:(id)sender;
 
-- (void)checkThread;
-- (void)removeThread;
+- (void)checkThread:(id)obj;
+- (void)removeThread:(id)obj;
 
 @end

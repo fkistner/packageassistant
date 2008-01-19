@@ -1,3 +1,6 @@
+#import <Security/Authorization.h>
+#include <Security/AuthorizationTags.h>
+
 #import "SheetController.h"
 
 @implementation SheetController
@@ -25,7 +28,7 @@
     
     canceled = false;
     
-    [NSThread detachNewThreadSelector:@selector(checkThread)
+    [NSThread detachNewThreadSelector:@selector(checkThread:)
         toTarget:self withObject:nil];
 }
 
@@ -47,7 +50,7 @@
         nil);                   // no parameters in message
 }
 
-- (void)sheetDidEndShouldDelete: (NSWindow *)endedSheet
+- (void)sheetDidEndShouldDelete:(NSWindow *)endedSheet
         returnCode: (int)returnCode
         contextInfo: (void *)contextInfo
 {
@@ -57,18 +60,9 @@
 
     if (returnCode == NSAlertDefaultReturn);
     {
-        [NSApp beginSheet:sheet modalForWindow:mainWindow
-            modalDelegate:self didEndSelector:nil contextInfo:nil];
-        
-        canceled = false;
-
-        [NSThread detachNewThreadSelector:@selector(removeThread)
-            toTarget:self withObject:nil];        
-
-    /*
-        AuthorizationRef authRef;
         OSStatus status;
         AuthorizationFlags flags;
+        AuthorizationRef authRef;
 
         flags = kAuthorizationFlagDefaults;
         status = AuthorizationCreate(NULL, kAuthorizationEmptyEnvironment,  
@@ -90,23 +84,18 @@
            return;
         }
 
-        //FILE* pipe = NULL;
-        flags = kAuthorizationFlagDefaults;
+        [NSApp beginSheet:sheet modalForWindow:mainWindow
+            modalDelegate:self didEndSelector:nil contextInfo:nil];
+        
+        canceled = false;
 
-//        char* args[1];
-//        args[0] = "-rf";
-
-        status =  
-        AuthorizationExecuteWithPrivileges(authRef,"RemoveHelper",flags,NULL,NULL);
-        AuthorizationExecuteWithPrivileges(authRef,"RemoveHelper",flags,NULL,NULL);
-
-        AuthorizationFree(authRef,kAuthorizationFlagDefaults);
-        */
+        [NSThread detachNewThreadSelector:@selector(removeThread:)
+            toTarget:self withObject:[NSNumber numberWithLong:(long)authRef]];
     }
 }
 
 // checker thread
-- (void)checkThread
+- (void)checkThread:(id)obj
 {
     [closeButton setTitle:@"Cancel"];
     [packageLabel setStringValue:@"Initializing..."];
@@ -129,13 +118,13 @@
             [NSString stringWithFormat:@"Checking package: %@...", [pkg name]]];
         
         // check package dependencies
-        bool ok = [packageAssistant
-            fastCheckDependencies:[packageAssistant
-                getPackageDependencies:[pkg name]]];
+        bool error = [PackageAssistant
+            checkDependencies:[PackageAssistant
+                getPackageDependencies:[pkg name]] fast:true];
                 
         [pool release];
             
-        if(!ok)
+        if(error)
             [pkg setBroken];
         else
             [pkg setOk];
@@ -156,8 +145,10 @@
 }
 
 // remover thread
-- (void)removeThread
+- (void)removeThread:(id)obj
 {
+    AuthorizationRef authRef = (AuthorizationRef) [(NSNumber*)obj longValue];
+
     [closeButton setTitle:@"Cancel"];
     [packageLabel setStringValue:@"Initializing..."];
     [titleLabel setStringValue:@"Wait while removing the packages..."];
@@ -168,17 +159,37 @@
     NSArray *filteredArray = [packages filteredArrayUsingPredicate:predicate];
 
     [progress setMaxValue:[filteredArray count]];
-    
+
+    // call helper with root priviledges
+    OSStatus status;
+    AuthorizationFlags flags;
+    FILE* pipe = NULL;
+    flags = kAuthorizationFlagDefaults;
+
+    // run
+    status = AuthorizationExecuteWithPrivileges(authRef,
+        "RemoveHelper", flags, NULL, &pipe);
+
     int i;
     bool localcancel = false;
     for(i = 0; i < [filteredArray count] && !localcancel; ++i)
     {
+        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
         Package *pkg = [filteredArray objectAtIndex:i];
         
         // set actual package
         [packageLabel setStringValue:
             [NSString stringWithFormat:@"Removing package: %@...", [pkg name]]];
+            
+        const char *n = [[pkg name] cStringUsingEncoding:NSUTF8StringEncoding];
+        long len = strlen(n);
+        fwrite(&len, sizeof(len), 1, pipe);
+        fwrite(n, len, 1, pipe);
+        fread(&len, sizeof(len), 1, pipe);
+        NSLog(@"Got: %d", len);
                     
+        [pool release];
+        
         // move progress bar
         [progress incrementBy:1.0];
         
@@ -186,6 +197,12 @@
         localcancel = canceled;
         [lock unlock];
     }
+
+    // close pipe
+    fclose(pipe);
+
+    // free authorization
+    AuthorizationFree(authRef, kAuthorizationFlagDefaults);
     
     [closeButton setTitle:@"Close"];
     [packageLabel setStringValue:@"Done!"];

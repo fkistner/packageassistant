@@ -6,7 +6,6 @@
 
 @interface MainController : NSObject
 {
-    IBOutlet PackageAssistant *packageAssistant;
     IBOutlet NSArrayController *packagesController;
     IBOutlet NSTableView *packagesTable;
     IBOutlet NSTableView *detailsTable;

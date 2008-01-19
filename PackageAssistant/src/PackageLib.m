@@ -4,19 +4,45 @@
 
 @implementation PackageAssistant
 
-- (id)init
+static NSString *receiptsDirectory = @"/Library/Receipts";
+static NSString *bomCommand = @"/usr/bin/lsbom";
+static NSString *bomFile = @".pkg/Contents/Archive.bom";
+
++ (NSString*)getPackageFile:(NSString*)name
 {
-    if(self = [super init])
-    {
-        receiptsDirectory = @"/Library/Receipts";
-        bomCommand = @"/usr/bin/lsbom";
-        bomFile = @".pkg/Contents/Archive.bom";
-    }
-    
-    return self;
+    return [receiptsDirectory stringByAppendingFormat:@"/%@.pkg", name];
 }
 
-- (NSArray*)listPackages
++ (NSString *)getOutput:(NSString *)cmd arguments:(NSArray *)args
+{
+    NSTask *task;   
+    NSData *result;
+    NSString *rawoutput;
+    NSPipe *outputPipe;
+
+    // create task and pipe objects
+    task = [NSTask new];
+    outputPipe = [NSPipe new];
+
+    // setup binary and arguments
+    [task setLaunchPath:cmd];
+    [task setStandardOutput:outputPipe];
+    [task setArguments:args];
+    
+    // launch task
+    [task launch];
+    
+    result = [[outputPipe fileHandleForReading] readDataToEndOfFile];
+    rawoutput = [[NSString alloc] initWithData: result
+                encoding: NSASCIIStringEncoding];
+
+    [task release];
+    [outputPipe release];
+
+    return [rawoutput autorelease];
+}
+
++ (NSArray*)listPackages
 {
     NSFileManager *fm = [NSFileManager defaultManager];
     NSDirectoryEnumerator *direnum = [fm enumeratorAtPath:receiptsDirectory];
@@ -53,7 +79,7 @@
     return [ret autorelease];
 }
 
-- (NSMutableArray*)getPackageDependencies:(NSString*)pkg
++ (NSMutableArray*)getPackageDependencies:(NSString*)pkg
 {
     // dependencies array to be returned
     NSMutableArray *ret = [NSMutableArray new];
@@ -99,7 +125,7 @@
     return [ret autorelease];
 }
 
-- (bool)checkDependencies:(NSArray*)deps
++ (bool)checkDependencies:(NSArray*)deps fast:(bool)fast
 {    
     int i;
     bool error = false;
@@ -110,12 +136,7 @@
         PackageDependency *thisDep = [deps objectAtIndex:i];
         
         // check file existance
-        NSString *file = [[NSString alloc] initWithString:
-            [[thisDep filename] substringFromIndex:1]];
-        bool exists = [fm fileExistsAtPath:file];
-        
-        // clean file
-        [file release];
+        bool exists = [fm fileExistsAtPath:[thisDep filename]];
         
         // set dependency state
         if(exists)
@@ -126,65 +147,12 @@
         {
             [thisDep setBroken];
             error = true;
+            if(fast)
+                return error;
         }
     }
     
     return error;
-}
-
-- (bool)fastCheckDependencies:(NSArray*)deps
-{    
-    int i;
-    NSFileManager *fm = [NSFileManager defaultManager];
-    
-    for(i = 0; i < [deps count]; ++i)
-    {
-        PackageDependency *thisDep = [deps objectAtIndex:i];
-        
-        // check file existance
-        NSString *file = [[NSString alloc] initWithString:
-            [[thisDep filename] substringFromIndex:1]];
-        bool exists = [fm fileExistsAtPath:file];
-        
-        // clean file
-        [file release];
-        
-        if(!exists)
-        {
-            return false;
-        }
-    }
-    
-    return true;
-}
-
-+ (NSString *)getOutput:(NSString *)cmd arguments:(NSArray *)args
-{
-    NSTask *task;   
-    NSData *result;
-    NSString *rawoutput;
-    NSPipe *outputPipe;
-
-    // create task and pipe objects
-    task = [NSTask new];
-    outputPipe = [NSPipe new];
-
-    // setup binary and arguments
-    [task setLaunchPath:cmd];
-    [task setStandardOutput:outputPipe];
-    [task setArguments:args];
-    
-    // launch task
-    [task launch];
-    
-    result = [[outputPipe fileHandleForReading] readDataToEndOfFile];
-    rawoutput = [[NSString alloc] initWithData: result
-                encoding: NSASCIIStringEncoding];
-
-    [task release];
-    [outputPipe release];
-
-    return [rawoutput autorelease];
 }
 
 @end
