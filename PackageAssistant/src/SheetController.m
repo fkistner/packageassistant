@@ -166,9 +166,13 @@
     FILE* pipe = NULL;
     flags = kAuthorizationFlagDefaults;
 
+    // get path
+    NSString *helper = [[NSBundle mainBundle]
+        pathForAuxiliaryExecutable:@"RemoveHelper"];
+
     // run
     status = AuthorizationExecuteWithPrivileges(authRef,
-        "RemoveHelper", flags, NULL, &pipe);
+        [helper cStringUsingEncoding:NSUTF8StringEncoding], flags, NULL, &pipe);
 
     int i;
     bool localcancel = false;

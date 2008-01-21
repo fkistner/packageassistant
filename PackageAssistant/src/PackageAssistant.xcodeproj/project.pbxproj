@@ -522,9 +522,9 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INSTALL_GROUP = root;
-				INSTALL_OWNER = root;
-				INSTALL_PATH = "";
+				INSTALL_GROUP = "$(USER)";
+				INSTALL_OWNER = "$(USER)";
+				INSTALL_PATH = "$(HOME)";
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -534,6 +534,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = RemoveHelper;
 				SKIP_INSTALL = YES;
+				STRIP_INSTALLED_PRODUCT = YES;
 				ZERO_LINK = NO;
 			};
 			name = Debug;
@@ -551,9 +552,9 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INSTALL_GROUP = root;
-				INSTALL_OWNER = root;
-				INSTALL_PATH = "";
+				INSTALL_GROUP = "$(USER)";
+				INSTALL_OWNER = "$(USER)";
+				INSTALL_PATH = "$(HOME)";
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -563,6 +564,7 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = RemoveHelper;
 				SKIP_INSTALL = YES;
+				STRIP_INSTALLED_PRODUCT = YES;
 				ZERO_LINK = NO;
 			};
 			name = Release;
