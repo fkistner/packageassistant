@@ -2,10 +2,11 @@
     IBClasses = (
         {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
         {
-            ACTIONS = {refresh = id; }; 
+            ACTIONS = {aboutClose = id; aboutOpen = id; refresh = id; }; 
             CLASS = MainController; 
             LANGUAGE = ObjC; 
             OUTLETS = {
+                aboutBox = NSPanel; 
                 detailsTable = NSTableView; 
                 mainWindow = NSWindow; 
                 packagesController = NSArrayController; 

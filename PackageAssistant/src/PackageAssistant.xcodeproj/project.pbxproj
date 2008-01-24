@@ -112,7 +112,7 @@
 		77F593650C374D3D0063B064 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/AssistantResources.nib; sourceTree = "<group>"; };
 		77F593740C374DC90063B064 /* PackageAssistant.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PackageAssistant.icns; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* PackageAssistant-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "PackageAssistant-Info.plist"; sourceTree = "<group>"; };
-		8D1107320486CEB800E47090 /* PackageAssistant.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PackageAssistant.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1107320486CEB800E47090 /* PackageAssistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PackageAssistant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

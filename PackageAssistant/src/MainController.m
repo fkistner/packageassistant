@@ -118,4 +118,28 @@ look at it for more information.
     return [NSPredicate predicateWithFormat:@"1 = 1"];
 }
 
+- (NSString*)license
+{
+    return [[[NSBundle mainBundle] resourcePath]
+        stringByAppendingString:@"/LICENSE"];
+}
+
+- (NSString*)contributors
+{
+    return [[[NSBundle mainBundle] resourcePath]
+        stringByAppendingString:@"/CONTRIBUTORS"];
+}
+
+- (IBAction)aboutOpen:(id)sender
+{
+    [NSApp beginSheet:aboutBox modalForWindow:mainWindow
+        modalDelegate:self didEndSelector:nil contextInfo:nil];
+}
+
+- (IBAction)aboutClose:(id)sender
+{
+    [aboutBox orderOut:nil];
+    [NSApp endSheet:aboutBox];
+}
+
 @end

@@ -195,9 +195,9 @@ look at it for more information.
             
         const char *n = [[pkg name] cStringUsingEncoding:NSUTF8StringEncoding];
         long len = strlen(n);
-        fwrite(&len, sizeof(len), 1, pipe);
-        fwrite(n, len, 1, pipe);
-        fread(&len, sizeof(len), 1, pipe);
+        write(fileno(pipe), &len, sizeof(len));
+        write(fileno(pipe), n, len);
+        read(fileno(pipe), &len, sizeof(len));
         NSLog(@"Got: %d", len);
                     
         [pool release];

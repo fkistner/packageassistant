@@ -16,7 +16,8 @@ look at it for more information.
     IBOutlet NSTableView *packagesTable;
     IBOutlet NSTableView *detailsTable;
     IBOutlet NSWindow *mainWindow;
-    
+    IBOutlet NSPanel *aboutBox;
+            
     NSNumber *_filter;
     NSMutableArray *_packages;
     Package *_lastSelectedPackage;
@@ -27,6 +28,11 @@ look at it for more information.
 - (void)setPackages:(NSMutableArray*)newPackages;
 - (void)tableViewSelectionDidChange:(NSNotification *)notification;
 
+- (NSString*)license;
+- (NSString*)contributors;
+
 - (IBAction)refresh:(id)sender;
+- (IBAction)aboutOpen:(id)sender;
+- (IBAction)aboutClose:(id)sender;
 
 @end

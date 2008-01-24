@@ -22,12 +22,12 @@ int main(int argc, char *argv[])
     // read name
     // delete
     // write result (zero or one, long)
-    while(fread(&len, sizeof(len), 1, stdin))
+    while(read(fileno(stdin), &len, sizeof(len)))
     {
         NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
             
         buf = malloc(len);
-        fread(buf, len, 1, stdin);
+        read(fileno(stdin), buf, len);
         NSString *objcname = [NSString stringWithCString:buf
             encoding:NSUTF8StringEncoding];
         NSLog(@"About to delete: %@", objcname);
@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
         
         // return ok
         len = 1;
-        fwrite(&len, sizeof(len), 1, stdout);
+        write(fileno(stdout), &len, sizeof(len));
         
         [pool release];
     }
