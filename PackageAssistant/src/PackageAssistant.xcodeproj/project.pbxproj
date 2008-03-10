@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		771B47890D8565C20050DC1C /* PackagesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771B47880D8565C20050DC1C /* PackagesController.m */; };
 		771C7E690C4C756800E5070D /* PackageStateTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 771C7E680C4C756800E5070D /* PackageStateTransformer.m */; };
 		771C7EC10C4C788400E5070D /* DependencyStateTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 771C7EC00C4C788400E5070D /* DependencyStateTransformer.m */; };
 		773FCFF70C37052600F35C4D /* red.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 773FCFF60C37052600F35C4D /* red.tiff */; };
@@ -86,6 +87,8 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* PackageAssistant_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageAssistant_Prefix.pch; sourceTree = "<group>"; };
+		771B47870D8565C20050DC1C /* PackagesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackagesController.h; sourceTree = "<group>"; };
+		771B47880D8565C20050DC1C /* PackagesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackagesController.m; sourceTree = "<group>"; };
 		771C7E670C4C756800E5070D /* PackageStateTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageStateTransformer.h; sourceTree = "<group>"; };
 		771C7E680C4C756800E5070D /* PackageStateTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageStateTransformer.m; sourceTree = "<group>"; };
 		771C7EBF0C4C788400E5070D /* DependencyStateTransformer.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = DependencyStateTransformer.h; sourceTree = "<group>"; };
@@ -261,6 +264,8 @@
 				77D52D870BB01BD600331AB5 /* MainController.m */,
 				775C88480BB0BD410029DA65 /* SheetController.h */,
 				775C88490BB0BD410029DA65 /* SheetController.m */,
+				771B47870D8565C20050DC1C /* PackagesController.h */,
+				771B47880D8565C20050DC1C /* PackagesController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -411,6 +416,7 @@
 				771C7E690C4C756800E5070D /* PackageStateTransformer.m in Sources */,
 				771C7EC10C4C788400E5070D /* DependencyStateTransformer.m in Sources */,
 				77A477BF0D84EEFA0068DF80 /* DetailsController.m in Sources */,
+				771B47890D8565C20050DC1C /* PackagesController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

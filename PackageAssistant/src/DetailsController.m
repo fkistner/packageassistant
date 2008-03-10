@@ -4,7 +4,7 @@
 
 @implementation DetailsController
 
-- (void)rearrange:(id)sender
+- (IBAction)rearrange:(id)sender
 {
     [self rearrangeObjects];    
 }

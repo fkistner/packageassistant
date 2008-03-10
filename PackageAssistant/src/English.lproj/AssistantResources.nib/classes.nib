@@ -81,6 +81,19 @@
 		<dict>
 			<key>ACTIONS</key>
 			<dict>
+				<key>search</key>
+				<string>id</string>
+			</dict>
+			<key>CLASS</key>
+			<string>PackagesController</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSArrayController</string>
+		</dict>
+		<dict>
+			<key>ACTIONS</key>
+			<dict>
 				<key>rearrange</key>
 				<string>id</string>
 			</dict>

@@ -6,7 +6,7 @@
     bool _filter;
 }
 
-- (void)rearrange:(id)sender;
+- (IBAction)rearrange:(id)sender;
 - (bool)filter;
 
 @end
