@@ -117,13 +117,17 @@ look at it for more information.
     bool localcancel = false;
     for(i = 0; i < [packages count] && !localcancel; ++i)
     {
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+        NSAutoreleasePool *pool = [NSAutoreleasePool new];
         
         Package *pkg = [packages objectAtIndex:i];
         
         // set actual package
         [packageLabel setStringValue:
             [NSString stringWithFormat:@"Checking package: %@...", [pkg name]]];
+        
+        // force redraw
+        [packageLabel display];
+
         
         // check package dependencies
         bool error = [PackageAssistant
@@ -192,6 +196,9 @@ look at it for more information.
         // set actual package
         [packageLabel setStringValue:
             [NSString stringWithFormat:@"Removing package: %@...", [pkg name]]];
+            
+        // force redraw
+        [packageLabel display];
             
         const char *n = [[pkg name] cStringUsingEncoding:NSUTF8StringEncoding];
         long len = strlen(n);
