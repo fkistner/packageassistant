@@ -18,13 +18,11 @@ look at it for more information.
     IBOutlet NSWindow *mainWindow;
     IBOutlet NSPanel *aboutBox;
             
-    NSNumber *_filter;
     NSMutableArray *_packages;
     Package *_lastSelectedPackage;
 }
 
 - (NSMutableArray*)packages;
-- (NSNumber*)filter;
 - (void)setPackages:(NSMutableArray*)newPackages;
 - (void)tableViewSelectionDidChange:(NSNotification *)notification;
 

@@ -10,6 +10,7 @@ look at it for more information.
 #import "MainController.h"
 #import "PackageStateTransformer.h"
 #import "DependencyStateTransformer.h"
+#import "MissingPredicateTransformer.h"
 
 @implementation MainController
 
@@ -19,6 +20,9 @@ look at it for more information.
     id pst = [[[PackageStateTransformer alloc] init] autorelease];
     id dst = [[[DependencyStateTransformer alloc] init] autorelease];
     
+    // register predicate transformers
+    id mpt = [[[MissingPredicateTransformer alloc] init] autorelease];
+    
     [NSValueTransformer
         setValueTransformer:pst
         forName:@"PackageStateTransformer"];
@@ -26,6 +30,10 @@ look at it for more information.
     [NSValueTransformer
         setValueTransformer:dst
         forName:@"DependencyStateTransformer"];
+
+    [NSValueTransformer
+        setValueTransformer:mpt
+        forName:@"MissingPredicateTransformer"];
 
     // refresh
     [self refresh:nil];
@@ -35,7 +43,6 @@ look at it for more information.
 {
     if(self = [super init])
     {
-        _filter = [NSNumber new];
         _packages = [NSMutableArray new];
         _lastSelectedPackage = nil;
     }
@@ -53,11 +60,6 @@ look at it for more information.
 - (NSMutableArray*) packages
 {
     return _packages;
-}
-
-- (NSNumber*)filter
-{
-    return _filter;
 }
 
 - (void)setPackages:(NSMutableArray*)newPackages
@@ -110,12 +112,6 @@ look at it for more information.
     }
     
     [packagesTable reloadData];
-}
-
-- (NSPredicate*)tableFilter
-{
-    //return [NSPredicate predicateWithFormat:@"state = %d", _filter];
-    return [NSPredicate predicateWithFormat:@"1 = 1"];
 }
 
 - (NSString*)license
