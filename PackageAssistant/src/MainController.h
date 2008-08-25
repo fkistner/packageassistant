@@ -9,10 +9,11 @@ look at it for more information.
 #import <Cocoa/Cocoa.h>
 #import "Package.h"
 #import "PackageLib.h"
+#import "PackagesController.h"
 
 @interface MainController : NSObject
 {
-    IBOutlet NSArrayController *packagesController;
+    IBOutlet PackagesController *packagesController;
     IBOutlet NSTableView *packagesTable;
     IBOutlet NSTableView *detailsTable;
     IBOutlet NSWindow *mainWindow;
@@ -30,6 +31,7 @@ look at it for more information.
 - (NSString*)contributors;
 
 - (IBAction)refresh:(id)sender;
+- (IBAction)doSearch:(id)sender;
 - (IBAction)aboutOpen:(id)sender;
 - (IBAction)aboutClose:(id)sender;
 

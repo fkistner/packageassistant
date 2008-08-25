@@ -63,17 +63,22 @@ look at it for more information.
     }
 }
 
-- (IBAction)addPackage:(id)sender
-{
-}
-
-- (IBAction)removePackage:(id)sender
-{
-}
-
 - (IBAction)refresh:(id)sender
 {
     [packagesController setContent:[PackageAssistant listPackages]];
+}
+
+- (IBAction)doSearch:(id)sender
+{
+    // search
+    [packagesController search:sender];
+    
+    // update details
+    [self tableViewSelectionDidChange:nil];
+    
+    // select search field
+    NSTextField *textField = (NSTextField*)sender;
+    [textField selectText:self];
 }
 
 // tableView

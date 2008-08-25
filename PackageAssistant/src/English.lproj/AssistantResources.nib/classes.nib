@@ -55,6 +55,8 @@
 				<string>id</string>
 				<key>aboutOpen</key>
 				<string>id</string>
+				<key>doSearch</key>
+				<string>id</string>
 				<key>refresh</key>
 				<string>id</string>
 			</dict>
@@ -71,7 +73,7 @@
 				<key>mainWindow</key>
 				<string>NSWindow</string>
 				<key>packagesController</key>
-				<string>NSArrayController</string>
+				<string>PackagesController</string>
 				<key>packagesTable</key>
 				<string>NSTableView</string>
 			</dict>
