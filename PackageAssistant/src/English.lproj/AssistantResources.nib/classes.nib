@@ -70,6 +70,8 @@
 				<string>NSPanel</string>
 				<key>detailsTable</key>
 				<string>NSTableView</string>
+				<key>loading</key>
+				<string>NSProgressIndicator</string>
 				<key>mainWindow</key>
 				<string>NSWindow</string>
 				<key>packagesController</key>

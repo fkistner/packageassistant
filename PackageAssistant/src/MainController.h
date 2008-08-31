@@ -18,6 +18,7 @@ look at it for more information.
     IBOutlet NSTableView *detailsTable;
     IBOutlet NSWindow *mainWindow;
     IBOutlet NSPanel *aboutBox;
+    IBOutlet NSProgressIndicator *loading;
             
     NSMutableArray *_packages;
     Package *_lastSelectedPackage;
