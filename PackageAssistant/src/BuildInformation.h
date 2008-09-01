@@ -8,12 +8,11 @@ look at it for more information.
 
 #import <Cocoa/Cocoa.h>
 
-@interface DependencyStateTransformer : NSObject {
+// Build information helper funcitions
+@interface BuildInformation : NSObject {
 }
 
-+ (Class)transformedValueClass;
-+ (BOOL)allowsReverseTransformation;
-
-- (id)transformedValue:(id)beforeObject;
++ (NSString*) getBundleVersion;
++ (NSString*) getSourceRevision;
 
 @end

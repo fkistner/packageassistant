@@ -31,8 +31,9 @@ int main(int argc, char *argv[])
         read(fileno(stdin), buf, len);
         NSString *objcname = [NSString stringWithCString:buf
             encoding:NSUTF8StringEncoding];
+#ifdef __HELPER_DEBUG__
         NSLog(@"About to delete: %@", objcname);
-        
+#endif
         // remove dependencies
         NSArray *deps = [PackageAssistant getPackageDependencies:objcname];
         
@@ -42,7 +43,9 @@ int main(int argc, char *argv[])
             sprintf(cmd, "/bin/rm -f \"%s\"", 
                 [[[deps objectAtIndex:i] filename]
                     cStringUsingEncoding:NSUTF8StringEncoding]);
+#ifdef __HELPER_DEBUG__
             NSLog(@"About to execute: %s", cmd);
+#endif
             system(cmd);
         }
         
@@ -50,8 +53,9 @@ int main(int argc, char *argv[])
         sprintf(cmd, "/bin/rm -rf \"%s\"",
             [[PackageAssistant getPackageFile: objcname]
                     cStringUsingEncoding:NSUTF8StringEncoding]);
-                
+#ifdef __HELPER_DEBUG__                
         NSLog(@"About to execute: %s", cmd);
+#endif
         system(cmd);
         
         free(buf);

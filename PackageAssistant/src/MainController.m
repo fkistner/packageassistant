@@ -6,11 +6,11 @@ You should have a LICENSE file along with this distribution
 look at it for more information.
 */
 
-#import "Build.h"
 #import "Package.h"
 #import "MainController.h"
 #import "PackageStateTransformer.h"
 #import "DependencyStateTransformer.h"
+#import "BuildInformation.h"
 
 @implementation MainController
 
@@ -32,7 +32,11 @@ look at it for more information.
     [mainWindow center];
     
     // setup version text
-    [version setTitleWithMnemonic:build_revision];
+    NSString *bundlver = [BuildInformation getBundleVersion];
+    NSString *revnum = [BuildInformation getSourceRevision];
+    [version setTitleWithMnemonic:
+        [NSString stringWithFormat:@"Version %@r%@", bundlver, revnum]
+    ];
 
     // refresh
     [self refresh:nil];

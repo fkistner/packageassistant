@@ -25,6 +25,7 @@
 		776808D20D47FD9E0040EB98 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 776808D10D47FD9E0040EB98 /* LICENSE */; };
 		7768090A0D47FF480040EB98 /* CONTRIBUTORS in Resources */ = {isa = PBXBuildFile; fileRef = 776809090D47FF480040EB98 /* CONTRIBUTORS */; };
 		778A6A9F0C39E229000F4A39 /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 778A6A9E0C39E228000F4A39 /* warning.png */; };
+		778BD0BA0E6B887C0015CA4F /* BuildInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 778BD0B90E6B887C0015CA4F /* BuildInformation.m */; };
 		77A477BF0D84EEFA0068DF80 /* DetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A477BD0D84EEFA0068DF80 /* DetailsController.m */; };
 		77D52D880BB01BD600331AB5 /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D52D870BB01BD600331AB5 /* MainController.m */; };
 		77F12DCA0D3F97AA00274DDD /* RemoveHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765E74B0D3EE037004C23BA /* RemoveHelper.m */; };
@@ -107,9 +108,10 @@
 		77861E880C3ECB7F001AD945 /* PackageDependency.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PackageDependency.h; sourceTree = "<group>"; };
 		77861E890C3ECB7F001AD945 /* PackageDependency.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PackageDependency.m; sourceTree = "<group>"; };
 		778A6A9E0C39E228000F4A39 /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warning.png; sourceTree = "<group>"; };
+		778BD0B80E6B887C0015CA4F /* BuildInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildInformation.h; sourceTree = "<group>"; };
+		778BD0B90E6B887C0015CA4F /* BuildInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildInformation.m; sourceTree = "<group>"; };
 		77A477BD0D84EEFA0068DF80 /* DetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsController.m; sourceTree = "<group>"; };
 		77A477BE0D84EEFA0068DF80 /* DetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsController.h; sourceTree = "<group>"; };
-		77C2AFD30E6B822300541588 /* Build.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Build.h; sourceTree = "<group>"; };
 		77D52D860BB01BD600331AB5 /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MainController.h; sourceTree = "<group>"; };
 		77D52D870BB01BD600331AB5 /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MainController.m; sourceTree = "<group>"; };
 		77D52D890BB01BE800331AB5 /* PackageLib.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PackageLib.h; sourceTree = "<group>"; };
@@ -213,7 +215,8 @@
 		29B97315FDCFA39411CA2CEA /* PackageAssistant */ = {
 			isa = PBXGroup;
 			children = (
-				77C2AFD30E6B822300541588 /* Build.h */,
+				778BD0B80E6B887C0015CA4F /* BuildInformation.h */,
+				778BD0B90E6B887C0015CA4F /* BuildInformation.m */,
 				29B97316FDCFA39411CA2CEA /* PackageAssistant.m */,
 				32CA4F630368D1EE00C91783 /* PackageAssistant_Prefix.pch */,
 			);
@@ -419,6 +422,7 @@
 				771C7EC10C4C788400E5070D /* DependencyStateTransformer.m in Sources */,
 				77A477BF0D84EEFA0068DF80 /* DetailsController.m in Sources */,
 				771B47890D8565C20050DC1C /* PackagesController.m in Sources */,
+				778BD0BA0E6B887C0015CA4F /* BuildInformation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
