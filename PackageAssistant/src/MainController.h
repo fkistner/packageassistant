@@ -19,6 +19,7 @@ look at it for more information.
     IBOutlet NSWindow *mainWindow;
     IBOutlet NSPanel *aboutBox;
     IBOutlet NSProgressIndicator *loading;
+    IBOutlet NSTextField *version;
             
     NSMutableArray *_packages;
     Package *_lastSelectedPackage;

@@ -19,9 +19,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
-	<string>VRTX</string>
+	<string>SOUR</string>
 	<key>CFBundleVersion</key>
-	<string>0.5</string>
+	<string>0.1</string>
 	<key>NSMainNibFile</key>
 	<string>AssistantResources</string>
 	<key>NSPrincipalClass</key>

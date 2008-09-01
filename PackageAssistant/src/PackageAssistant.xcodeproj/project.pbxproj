@@ -109,6 +109,7 @@
 		778A6A9E0C39E228000F4A39 /* warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warning.png; sourceTree = "<group>"; };
 		77A477BD0D84EEFA0068DF80 /* DetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsController.m; sourceTree = "<group>"; };
 		77A477BE0D84EEFA0068DF80 /* DetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsController.h; sourceTree = "<group>"; };
+		77C2AFD30E6B822300541588 /* Build.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Build.h; sourceTree = "<group>"; };
 		77D52D860BB01BD600331AB5 /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MainController.h; sourceTree = "<group>"; };
 		77D52D870BB01BD600331AB5 /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MainController.m; sourceTree = "<group>"; };
 		77D52D890BB01BE800331AB5 /* PackageLib.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PackageLib.h; sourceTree = "<group>"; };
@@ -212,6 +213,7 @@
 		29B97315FDCFA39411CA2CEA /* PackageAssistant */ = {
 			isa = PBXGroup;
 			children = (
+				77C2AFD30E6B822300541588 /* Build.h */,
 				29B97316FDCFA39411CA2CEA /* PackageAssistant.m */,
 				32CA4F630368D1EE00C91783 /* PackageAssistant_Prefix.pch */,
 			);
@@ -642,6 +644,7 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
 				DEAD_CODE_STRIPPING = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -656,6 +659,11 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = (
+					i386,
+					ppc,
+				);
+				CURRENT_PROJECT_VERSION = "";
 				DEAD_CODE_STRIPPING = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_CW_ASM_SYNTAX = NO;

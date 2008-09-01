@@ -78,6 +78,8 @@
 				<string>PackagesController</string>
 				<key>packagesTable</key>
 				<string>NSTableView</string>
+				<key>version</key>
+				<string>NSTextField</string>
 			</dict>
 			<key>SUPERCLASS</key>
 			<string>NSObject</string>

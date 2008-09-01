@@ -6,6 +6,7 @@ You should have a LICENSE file along with this distribution
 look at it for more information.
 */
 
+#import "Build.h"
 #import "Package.h"
 #import "MainController.h"
 #import "PackageStateTransformer.h"
@@ -29,6 +30,9 @@ look at it for more information.
 
     // center window
     [mainWindow center];
+    
+    // setup version text
+    [version setTitleWithMnemonic:build_revision];
 
     // refresh
     [self refresh:nil];
