@@ -10,14 +10,15 @@ look at it for more information.
 #import "Package.h"
 #import "PackageLib.h"
 #import "PackagesController.h"
+#import "AboutController.h"
 
 @interface MainController : NSObject
 {
     IBOutlet PackagesController *packagesController;
+    IBOutlet AboutController *aboutController;
     IBOutlet NSTableView *packagesTable;
     IBOutlet NSTableView *detailsTable;
     IBOutlet NSWindow *mainWindow;
-    IBOutlet NSPanel *aboutBox;
     IBOutlet NSProgressIndicator *loading;
     IBOutlet NSTextField *version;
             
@@ -25,16 +26,13 @@ look at it for more information.
     Package *_lastSelectedPackage;
 }
 
+- (IBAction)refresh:(id)sender;
+- (IBAction)doSearch:(id)sender;
+
 - (NSMutableArray*)packages;
 - (void)setPackages:(NSMutableArray*)newPackages;
 - (void)tableViewSelectionDidChange:(NSNotification *)notification;
 
-- (NSString*)license;
-- (NSString*)contributors;
-
-- (IBAction)refresh:(id)sender;
-- (IBAction)doSearch:(id)sender;
-- (IBAction)aboutOpen:(id)sender;
-- (IBAction)aboutClose:(id)sender;
+- (NSString*)version;
 
 @end

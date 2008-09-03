@@ -31,13 +31,6 @@ look at it for more information.
     // center window
     [mainWindow center];
     
-    // setup version text
-    NSString *bundlver = [BuildInformation getBundleVersion];
-    NSString *revnum = [BuildInformation getSourceRevision];
-    [version setTitleWithMnemonic:
-        [NSString stringWithFormat:@"Version %@r%@", bundlver, revnum]
-    ];
-
     // refresh
     [self refresh:nil];
 }
@@ -128,28 +121,12 @@ look at it for more information.
     [packagesTable reloadData];
 }
 
-- (NSString*)license
+- (NSString*)version
 {
-    return [[[NSBundle mainBundle] resourcePath]
-        stringByAppendingString:@"/LICENSE"];
-}
-
-- (NSString*)contributors
-{
-    return [[[NSBundle mainBundle] resourcePath]
-        stringByAppendingString:@"/CONTRIBUTORS"];
-}
-
-- (IBAction)aboutOpen:(id)sender
-{
-    [NSApp beginSheet:aboutBox modalForWindow:mainWindow
-        modalDelegate:self didEndSelector:nil contextInfo:nil];
-}
-
-- (IBAction)aboutClose:(id)sender
-{
-    [aboutBox orderOut:nil];
-    [NSApp endSheet:aboutBox];
+    // setup version text
+    NSString *bundlver = [BuildInformation getBundleVersion];
+    NSString *revnum = [BuildInformation getSourceRevision];
+    return [NSString stringWithFormat:@"Version %@r%@", bundlver, revnum];
 }
 
 @end

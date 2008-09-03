@@ -22,8 +22,6 @@
 		7765E7230D3EDEE3004C23BA /* PackageDependency.h in Headers */ = {isa = PBXBuildFile; fileRef = 77861E880C3ECB7F001AD945 /* PackageDependency.h */; settings = {ATTRIBUTES = (); }; };
 		7765E7240D3EDEE6004C23BA /* PackageDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 77861E890C3ECB7F001AD945 /* PackageDependency.m */; };
 		7765E7250D3EDEEB004C23BA /* Package.m in Sources */ = {isa = PBXBuildFile; fileRef = 77861E7F0C3EC88F001AD945 /* Package.m */; };
-		776808D20D47FD9E0040EB98 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 776808D10D47FD9E0040EB98 /* LICENSE */; };
-		7768090A0D47FF480040EB98 /* CONTRIBUTORS in Resources */ = {isa = PBXBuildFile; fileRef = 776809090D47FF480040EB98 /* CONTRIBUTORS */; };
 		778A6A9F0C39E229000F4A39 /* warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 778A6A9E0C39E228000F4A39 /* warning.png */; };
 		778BD0BA0E6B887C0015CA4F /* BuildInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 778BD0B90E6B887C0015CA4F /* BuildInformation.m */; };
 		77A477BF0D84EEFA0068DF80 /* DetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77A477BD0D84EEFA0068DF80 /* DetailsController.m */; };
@@ -34,6 +32,8 @@
 		77F12E700D3FB2E600274DDD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F12E6F0D3FB2E600274DDD /* Security.framework */; };
 		77F12EC60D3FB57400274DDD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		77F12EC90D3FB58000274DDD /* PackageLib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7765E6E40D3EDD96004C23BA /* PackageLib.dylib */; };
+		77F22B410E6E322200D38928 /* credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 77F22B400E6E322200D38928 /* credits.rtf */; };
+		77F22B4B0E6E361D00D38928 /* AboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F22B4A0E6E361D00D38928 /* AboutController.m */; };
 		77F593660C374D3D0063B064 /* AssistantResources.nib in Resources */ = {isa = PBXBuildFile; fileRef = 77F593640C374D3D0063B064 /* AssistantResources.nib */; };
 		77F593750C374DC90063B064 /* PackageAssistant.icns in Resources */ = {isa = PBXBuildFile; fileRef = 77F593740C374DC90063B064 /* PackageAssistant.icns */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -101,8 +101,6 @@
 		775C88490BB0BD410029DA65 /* SheetController.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = SheetController.m; sourceTree = "<group>"; };
 		7765E6E40D3EDD96004C23BA /* PackageLib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = PackageLib.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		7765E74B0D3EE037004C23BA /* RemoveHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoveHelper.m; sourceTree = "<group>"; };
-		776808D10D47FD9E0040EB98 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		776809090D47FF480040EB98 /* CONTRIBUTORS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CONTRIBUTORS; sourceTree = "<group>"; };
 		77861E7E0C3EC88F001AD945 /* Package.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Package.h; sourceTree = "<group>"; };
 		77861E7F0C3EC88F001AD945 /* Package.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Package.m; sourceTree = "<group>"; };
 		77861E880C3ECB7F001AD945 /* PackageDependency.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PackageDependency.h; sourceTree = "<group>"; };
@@ -118,6 +116,9 @@
 		77D52D8A0BB01BE800331AB5 /* PackageLib.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PackageLib.m; sourceTree = "<group>"; };
 		77F12DBA0D3F971F00274DDD /* RemoveHelper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RemoveHelper; sourceTree = BUILT_PRODUCTS_DIR; };
 		77F12E6F0D3FB2E600274DDD /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
+		77F22B400E6E322200D38928 /* credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = credits.rtf; sourceTree = "<group>"; };
+		77F22B490E6E361D00D38928 /* AboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutController.h; sourceTree = "<group>"; };
+		77F22B4A0E6E361D00D38928 /* AboutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutController.m; sourceTree = "<group>"; };
 		77F593650C374D3D0063B064 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/AssistantResources.nib; sourceTree = "<group>"; };
 		77F593740C374DC90063B064 /* PackageAssistant.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PackageAssistant.icns; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* PackageAssistant-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "PackageAssistant-Info.plist"; sourceTree = "<group>"; };
@@ -226,6 +227,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				77F22B400E6E322200D38928 /* credits.rtf */,
 				77F593640C374D3D0063B064 /* AssistantResources.nib */,
 				8D1107310486CEB800E47090 /* PackageAssistant-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -234,8 +236,6 @@
 				773FCFFA0C37053400F35C4D /* green.tiff */,
 				77F593740C374DC90063B064 /* PackageAssistant.icns */,
 				778A6A9E0C39E228000F4A39 /* warning.png */,
-				776808D10D47FD9E0040EB98 /* LICENSE */,
-				776809090D47FF480040EB98 /* CONTRIBUTORS */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -263,6 +263,8 @@
 		7711E2480D3EB84400B7CCB5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				77F22B490E6E361D00D38928 /* AboutController.h */,
+				77F22B4A0E6E361D00D38928 /* AboutController.m */,
 				77A477BD0D84EEFA0068DF80 /* DetailsController.m */,
 				77A477BE0D84EEFA0068DF80 /* DetailsController.h */,
 				77D52D860BB01BD600331AB5 /* MainController.h */,
@@ -385,8 +387,7 @@
 				77F593660C374D3D0063B064 /* AssistantResources.nib in Resources */,
 				77F593750C374DC90063B064 /* PackageAssistant.icns in Resources */,
 				778A6A9F0C39E229000F4A39 /* warning.png in Resources */,
-				776808D20D47FD9E0040EB98 /* LICENSE in Resources */,
-				7768090A0D47FF480040EB98 /* CONTRIBUTORS in Resources */,
+				77F22B410E6E322200D38928 /* credits.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +424,7 @@
 				77A477BF0D84EEFA0068DF80 /* DetailsController.m in Sources */,
 				771B47890D8565C20050DC1C /* PackagesController.m in Sources */,
 				778BD0BA0E6B887C0015CA4F /* BuildInformation.m in Sources */,
+				77F22B4B0E6E361D00D38928 /* AboutController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
