@@ -35,5 +35,7 @@ look at it for more information.
 - (void)setBroken;
 - (void)setName:(NSString *)name;
 - (bool)isOk;
+- (bool)isUnknown;
+- (bool)isBroken;
 
 @end

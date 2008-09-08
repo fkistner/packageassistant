@@ -79,6 +79,16 @@ look at it for more information.
     return (_state == 1);
 }
 
+- (bool)isBroken
+{
+    return (_state == 2);
+}
+
+- (bool)isUnknown
+{
+    return (_state == 0);
+}
+
 - (void)setUnknown
 {
     _state = 0;

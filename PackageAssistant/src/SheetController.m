@@ -127,20 +127,22 @@ look at it for more information.
         
         // force redraw
         [packageLabel display];
-
         
-        // check package dependencies
-        bool error = [PackageAssistant
-            checkDependencies:[PackageAssistant
-                getPackageDependencies:[pkg name]] fast:true];
-                
+        if([pkg isUnknown])
+        {
+            // check package dependencies
+            bool error = [PackageAssistant
+                checkDependencies:[PackageAssistant
+                    getPackageDependencies:[pkg name]] fast:true];
+                    
+            if(error)
+                [pkg setBroken];
+            else
+                [pkg setOk];
+        }
+
         [pool release];
-            
-        if(error)
-            [pkg setBroken];
-        else
-            [pkg setOk];
-            
+        
         // move progress bar
         [progress incrementBy:1.0];
         

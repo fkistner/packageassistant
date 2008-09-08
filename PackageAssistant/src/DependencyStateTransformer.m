@@ -29,7 +29,7 @@ look at it for more information.
     {
         // ok
         case 0:
-            return nil;
+            return [NSImage imageNamed:@"check"];
             break;
             
         // missing
