@@ -8,7 +8,7 @@ look at it for more information.
 
 #import "BuildInformation.h"
 
-NSString *build_revision = @"$Revision$";
+NSString *build_revision = @"$Revision $";
 NSString *build_id = @"$Id$";
 
 @implementation BuildInformation
