@@ -140,11 +140,22 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
     return [ret autorelease];
 }
 
-+ (bool)checkDependencies:(Package*)pkg fast:(bool)fast
-{    
++ (bool)checkDependencies:(Package*)pkg fast:(bool)f
+{
+    bool error = [PackageAssistant checkDependenciesArray:[pkg dependencies]
+        basedir:[pkg basedir] fast:f];
+        
+    if(error)
+        [pkg setBroken];
+        
+    return error;
+}
+
++ (bool)checkDependenciesArray:(NSArray*)deps
+    basedir:(NSString*)dir fast:(bool)fast
+{
     int i;
     bool error = false;
-    NSArray *deps = [pkg dependencies];
     NSFileManager *fm = [NSFileManager defaultManager];
     
     for(i = 0; i < [deps count]; ++i)
@@ -152,7 +163,7 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
         PackageDependency *thisDep = [deps objectAtIndex:i];
         
         // check file existance appending base dir to the dependency
-        NSString *filetocheck = [[pkg basedir]
+        NSString *filetocheck = [dir
             stringByAppendingString:[thisDep filename]];
         bool exists = [fm fileExistsAtPath:filetocheck];
         
@@ -164,7 +175,6 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
         else
         {
             [thisDep setBroken];
-            [pkg setBroken];
             error = true;
             if(fast)
                 return error;

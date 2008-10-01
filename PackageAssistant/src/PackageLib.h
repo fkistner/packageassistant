@@ -18,5 +18,6 @@ look at it for more information.
 + (NSMutableArray*)getPackageDependencies:(NSString*)pkg;
 
 + (bool)checkDependencies:(Package*)pkg fast:(bool)fast;
++ (bool)checkDependenciesArray:(NSArray*)deps basedir:(NSString*)dir fast:(bool)fast;
 
 @end

@@ -131,9 +131,12 @@ look at it for more information.
         if([pkg isUnknown])
         {
             // check package dependencies
-            bool error = [PackageAssistant
-                checkDependencies:pkg fast:true];
-                    
+            NSArray *deps = [PackageAssistant
+                getPackageDependencies:[pkg name]];
+                
+            bool error = [PackageAssistant checkDependenciesArray:deps
+                basedir:[pkg basedir] fast:true];
+                
             if(error)
                 [pkg setBroken];
             else
