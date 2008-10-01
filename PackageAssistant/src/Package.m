@@ -15,8 +15,10 @@ look at it for more information.
     if(self = [super init])
     {
         _name = [[NSString alloc] initWithString:@"Unknown"];
+        _basedir = [[NSString alloc] initWithString:@"Unknown"];
         _remove = [NSNumber numberWithBool:false];
         _state = 0;
+        _apple = false;
         _dependencies = [NSMutableArray new];
     }
     
@@ -26,6 +28,7 @@ look at it for more information.
 - (void)dealloc
 {
     [_name release];
+    [_basedir release];
     [_dependencies release];
 
     [super dealloc];
@@ -36,6 +39,11 @@ look at it for more information.
     return _name;
 }
 
+- (NSString*)basedir
+{
+    return _basedir;
+}
+
 - (NSNumber*)remove
 {
     return _remove;
@@ -44,6 +52,11 @@ look at it for more information.
 - (int)state
 {
     return _state;
+}
+
+- (bool)isApple
+{
+    return _apple;
 }
 
 - (NSArray*)dependencies
@@ -104,10 +117,21 @@ look at it for more information.
     _state = 2;
 }
 
+- (void)setApple:(bool)ap
+{
+    _apple = ap;
+}
+
 - (void)setName:(NSString *)name
 {
     [_name autorelease];
     _name = [name retain];
+}
+
+- (void)setBaseDirectory:(NSString *)dir
+{
+    [_basedir autorelease];
+    _basedir = [dir retain];
 }
 
 @end

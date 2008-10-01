@@ -7,10 +7,27 @@ look at it for more information.
 */
 
 #import "PackageLib.h"
+#import "PackageDependency.h"
 
 #import <stdio.h>
 #import <string.h>
 #import <Cocoa/Cocoa.h>
+
+int longestFirst(PackageDependency *a, PackageDependency *b, void *ctx)
+{
+    if([[a filename] length] == [[b filename] length])
+    {
+        return 0;
+    }
+    else if([[a filename] length] > [[b filename] length])
+    {
+        return -1;
+    }
+    else
+    {
+        return 1;
+    }
+}
 
 int main(int argc, char *argv[])
 {
@@ -19,7 +36,7 @@ int main(int argc, char *argv[])
     char cmd[1024] = {0};
 
     // protocol is:
-    // expect name length (long)
+    // expect package name length (long)
     // read name
     // delete
     // write result (zero or one, long)
@@ -35,12 +52,16 @@ int main(int argc, char *argv[])
         NSLog(@"About to delete: %@", objcname);
 #endif
         // remove dependencies
-        NSArray *deps = [PackageAssistant getPackageDependencies:objcname];
+        NSString *basedir = [PackageAssistant getPackageBaseDir:objcname];
+        NSArray *pdeps = [PackageAssistant getPackageDependencies:objcname];
+        NSMutableArray *deps = [NSMutableArray arrayWithArray:pdeps];
+        [deps sortUsingFunction:&longestFirst context:nil];
         
         int i;
         for(i = 0; i < [deps count]; i++)
         {
-            sprintf(cmd, "/bin/rm -f \"%s\"", 
+            sprintf(cmd, "/bin/rm -f \"%s%s\"",
+                [basedir cStringUsingEncoding:NSUTF8StringEncoding],
                 [[[deps objectAtIndex:i] filename]
                     cStringUsingEncoding:NSUTF8StringEncoding]);
 #ifdef __HELPER_DEBUG__

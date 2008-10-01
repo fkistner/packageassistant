@@ -15,6 +15,7 @@ look at it for more information.
 static NSString *receiptsDirectory = @"/Library/Receipts";
 static NSString *bomCommand = @"/usr/bin/lsbom";
 static NSString *bomFile = @".pkg/Contents/Archive.bom";
+static NSString *infoFile = @".pkg/Contents/Info.plist";
 
 + (NSString*)getPackageFile:(NSString*)name
 {
@@ -74,6 +75,13 @@ static NSString *bomFile = @".pkg/Contents/Archive.bom";
             // set name
             [pkg setName:name];
             
+            // set the base directory (where the package was installed)
+            NSString *basedir = [PackageAssistant getPackageBaseDir:name];
+            [pkg setBaseDirectory:basedir];
+            
+            // check if it an APPLE package
+            [pkg setApple:[PackageAssistant isApplePackage:name]];
+            
             // add the package
             [ret addObject:pkg];
             
@@ -93,8 +101,8 @@ static NSString *bomFile = @".pkg/Contents/Archive.bom";
     NSMutableArray *ret = [NSMutableArray new];
     
     // package bom file
-    NSString *file = [[NSString alloc] initWithFormat:@"%@/%@%@",
-        receiptsDirectory, pkg, bomFile];
+    NSString *file = [receiptsDirectory stringByAppendingFormat:@"/%@%@",
+        pkg, bomFile];
     
     // arguments to run lsbom
     NSArray *args = [[NSArray alloc] initWithObjects:@"-s", @"-f", file, nil];
@@ -108,7 +116,6 @@ static NSString *bomFile = @".pkg/Contents/Archive.bom";
         [output componentsSeparatedByString:@"\n"]];
     
     // clean
-    [file release];
     [args release];
     [output release];
     
@@ -133,18 +140,21 @@ static NSString *bomFile = @".pkg/Contents/Archive.bom";
     return [ret autorelease];
 }
 
-+ (bool)checkDependencies:(NSArray*)deps fast:(bool)fast
++ (bool)checkDependencies:(Package*)pkg fast:(bool)fast
 {    
     int i;
     bool error = false;
+    NSArray *deps = [pkg dependencies];
     NSFileManager *fm = [NSFileManager defaultManager];
     
     for(i = 0; i < [deps count]; ++i)
     {
         PackageDependency *thisDep = [deps objectAtIndex:i];
         
-        // check file existance
-        bool exists = [fm fileExistsAtPath:[thisDep filename]];
+        // check file existance appending base dir to the dependency
+        NSString *filetocheck = [[pkg basedir]
+            stringByAppendingString:[thisDep filename]];
+        bool exists = [fm fileExistsAtPath:filetocheck];
         
         // set dependency state
         if(exists)
@@ -154,6 +164,7 @@ static NSString *bomFile = @".pkg/Contents/Archive.bom";
         else
         {
             [thisDep setBroken];
+            [pkg setBroken];
             error = true;
             if(fast)
                 return error;
@@ -161,6 +172,58 @@ static NSString *bomFile = @".pkg/Contents/Archive.bom";
     }
     
     return error;
+}
+
++ (NSString*)getPackageBaseDir:(NSString*)name
+{
+    NSString *plist = [receiptsDirectory stringByAppendingFormat:@"/%@%@",
+        name, infoFile];
+        
+    // load property list
+    NSData *plistData = [NSData dataWithContentsOfFile:plist];
+
+    // parse property list
+    NSString *error;
+    NSPropertyListFormat format;
+    NSDictionary *plistdic;
+    plistdic = [NSPropertyListSerialization propertyListFromData:plistData
+                                    mutabilityOption:NSPropertyListImmutable
+                                    format:&format
+                                    errorDescription:&error];
+    if(!plist)
+    {
+        NSLog(error);
+        [error release];
+    }
+
+    NSString *tmpdir = [plistdic objectForKey:@"IFPkgRelocatedPath"];
+    return [tmpdir substringWithRange:NSMakeRange(1, [tmpdir length] - 2)];
+}
+
++ (bool)isApplePackage:(NSString*)name
+{
+    NSString *plist = [receiptsDirectory stringByAppendingFormat:@"/%@%@",
+        name, infoFile];
+        
+    // load property list
+    NSData *plistData = [NSData dataWithContentsOfFile:plist];
+
+    // parse property list
+    NSString *error;
+    NSPropertyListFormat format;
+    NSDictionary *plistdic;
+    plistdic = [NSPropertyListSerialization propertyListFromData:plistData
+                                    mutabilityOption:NSPropertyListImmutable
+                                    format:&format
+                                    errorDescription:&error];
+    if(!plist)
+    {
+        NSLog(error);
+        [error release];
+    }
+
+    NSString *bundleid = [plistdic objectForKey:@"CFBundleIdentifier"];
+    return [bundleid hasPrefix:@"com.apple."];
 }
 
 @end

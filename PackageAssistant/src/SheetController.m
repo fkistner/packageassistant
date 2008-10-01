@@ -132,8 +132,7 @@ look at it for more information.
         {
             // check package dependencies
             bool error = [PackageAssistant
-                checkDependencies:[PackageAssistant
-                    getPackageDependencies:[pkg name]] fast:true];
+                checkDependencies:pkg fast:true];
                     
             if(error)
                 [pkg setBroken];
@@ -207,8 +206,7 @@ look at it for more information.
         write(fileno(pipe), &len, sizeof(len));
         write(fileno(pipe), n, len);
         read(fileno(pipe), &len, sizeof(len));
-        NSLog(@"Got: %d", len);
-                    
+                            
         [pool release];
         
         // move progress bar

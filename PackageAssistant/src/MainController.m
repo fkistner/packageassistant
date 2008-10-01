@@ -10,6 +10,7 @@ look at it for more information.
 #import "MainController.h"
 #import "PackageStateTransformer.h"
 #import "DependencyStateTransformer.h"
+#import "PackageAppleTransformer.h"
 #import "BuildInformation.h"
 
 @implementation MainController
@@ -19,6 +20,7 @@ look at it for more information.
     // register image transformers
     id pst = [[[PackageStateTransformer alloc] init] autorelease];
     id dst = [[[DependencyStateTransformer alloc] init] autorelease];
+    id pat = [[[PackageAppleTransformer alloc] init] autorelease];
         
     [NSValueTransformer
         setValueTransformer:pst
@@ -27,6 +29,10 @@ look at it for more information.
     [NSValueTransformer
         setValueTransformer:dst
         forName:@"DependencyStateTransformer"];
+
+    [NSValueTransformer
+        setValueTransformer:pat
+        forName:@"PackageAppleTransformer"];
 
     // center window
     [mainWindow center];
@@ -108,11 +114,11 @@ look at it for more information.
         NSArray *deps = [PackageAssistant getPackageDependencies:
                 [_lastSelectedPackage name]];
 
-        // check them
-        [PackageAssistant checkDependencies:deps fast:false];
-    
         // load package's dependencies
         [_lastSelectedPackage setDependencies:deps];
+
+        // check them
+        [PackageAssistant checkDependencies:_lastSelectedPackage fast:false];   
 
         // progress indicator STOP
         [loading stopAnimation:self];

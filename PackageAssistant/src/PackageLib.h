@@ -7,13 +7,16 @@ look at it for more information.
 */
 
 #import <Cocoa/Cocoa.h>
+#import "Package.h"
 
 @interface PackageAssistant : NSObject
 
 + (NSArray*)listPackages;
 + (NSString*)getPackageFile:(NSString*)name;
++ (NSString*)getPackageBaseDir:(NSString*)name;
++ (bool)isApplePackage:(NSString*)name;
 + (NSMutableArray*)getPackageDependencies:(NSString*)pkg;
 
-+ (bool)checkDependencies:(NSArray*)deps fast:(bool)fast;
++ (bool)checkDependencies:(Package*)pkg fast:(bool)fast;
 
 @end
