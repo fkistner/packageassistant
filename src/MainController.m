@@ -68,7 +68,7 @@ look at it for more information.
 {
     if(_packages != newPackages)
     {
-        [_packages autorelease];
+        [_packages release];
         _packages = [[NSMutableArray alloc] initWithArray: newPackages];
     }
 }

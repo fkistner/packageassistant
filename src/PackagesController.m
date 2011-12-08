@@ -24,7 +24,7 @@ look at it for more information.
 {
     if (_searchString != str)
 	{
-        [_searchString autorelease];
+        [_searchString release];
         _searchString = [str copy];
     }
 }

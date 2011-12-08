@@ -53,7 +53,7 @@ look at it for more information.
         @selector(sheetDidEndShouldDelete:returnCode:contextInfo:),
                                 // did-end selector
         NULL,                   // no need for did-dismiss selector
-        sender,                 // context info
+        nil,                    // context info
         @"There is no undo for this operation.",  // additional text
         nil);                   // no parameters in message
 }
@@ -66,7 +66,7 @@ look at it for more information.
     [endedSheet orderOut:nil];
     [NSApp endSheet:endedSheet];
 
-    if (returnCode == NSAlertDefaultReturn);
+    if (returnCode == NSAlertDefaultReturn)
     {
         OSStatus status;
         AuthorizationFlags flags;

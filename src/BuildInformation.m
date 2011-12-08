@@ -21,8 +21,9 @@ NSString *build_id = @"$Id$";
 
 + (NSString*) getSourceRevision
 {
-    NSString *revnum = [build_revision substringFromIndex:11];
-    return [revnum substringToIndex:([revnum length] - 2)];
+    //NSString *revnum = [build_revision substringFromIndex:11];
+    //return [revnum substringToIndex:([revnum length] - 2)];
+    return @"git";
 }
 
 @end

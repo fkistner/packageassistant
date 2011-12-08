@@ -67,7 +67,7 @@ look at it for more information.
 - (void)setDependencies:(id)dependencies
 {
     // set dependencies pointer
-    [_dependencies autorelease];
+    [_dependencies release];
     _dependencies = [dependencies retain];
     
     // update package state
@@ -124,13 +124,13 @@ look at it for more information.
 
 - (void)setName:(NSString *)name
 {
-    [_name autorelease];
+    [_name release];
     _name = [name retain];
 }
 
 - (void)setBaseDirectory:(NSString *)dir
 {
-    [_basedir autorelease];
+    [_basedir release];
     _basedir = [dir retain];
 }
 

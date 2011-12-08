@@ -202,7 +202,7 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
                                     errorDescription:&error];
     if(!plist)
     {
-        NSLog(error);
+        NSLog(@"%@", error);
         [error release];
     }
 
@@ -228,7 +228,7 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
                                     errorDescription:&error];
     if(!plist)
     {
-        NSLog(error);
+        NSLog(@"%@", error);
         [error release];
     }
 
