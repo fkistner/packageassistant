@@ -42,50 +42,50 @@ int main(int argc, char *argv[])
     // write result (zero or one, long)
     while(read(fileno(stdin), &len, sizeof(len)))
     {
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+        @autoreleasepool {
             
-        buf = malloc(len);
-        read(fileno(stdin), buf, len);
-        NSString *objcname = [NSString stringWithCString:buf
-            encoding:NSUTF8StringEncoding];
+            buf = malloc(len);
+            read(fileno(stdin), buf, len);
+            NSString *objcname = [NSString stringWithCString:buf
+                encoding:NSUTF8StringEncoding];
 #ifdef __HELPER_DEBUG__
-        NSLog(@"About to delete: %@", objcname);
+            NSLog(@"About to delete: %@", objcname);
 #endif
-        // remove dependencies
-        NSString *basedir = [PackageAssistant getPackageBaseDir:objcname];
-        NSArray *pdeps = [PackageAssistant getPackageDependencies:objcname];
-        NSMutableArray *deps = [NSMutableArray arrayWithArray:pdeps];
-        [deps sortUsingFunction:&longestFirst context:nil];
-        
-        int i;
-        for(i = 0; i < [deps count]; i++)
-        {
-            sprintf(cmd, "/bin/rm -f \"%s%s\"",
-                [basedir cStringUsingEncoding:NSUTF8StringEncoding],
-                [[[deps objectAtIndex:i] filename]
-                    cStringUsingEncoding:NSUTF8StringEncoding]);
+            // remove dependencies
+            NSString *basedir = [PackageAssistant getPackageBaseDir:objcname];
+            NSArray *pdeps = [PackageAssistant getPackageDependencies:objcname];
+            NSMutableArray *deps = [NSMutableArray arrayWithArray:pdeps];
+            [deps sortUsingFunction:&longestFirst context:nil];
+            
+            int i;
+            for(i = 0; i < [deps count]; i++)
+            {
+                sprintf(cmd, "/bin/rm -f \"%s%s\"",
+                    [basedir cStringUsingEncoding:NSUTF8StringEncoding],
+                    [[[deps objectAtIndex:i] filename]
+                        cStringUsingEncoding:NSUTF8StringEncoding]);
 #ifdef __HELPER_DEBUG__
+                NSLog(@"About to execute: %s", cmd);
+#endif
+                system(cmd);
+            }
+            
+            // remove receipt
+            sprintf(cmd, "/bin/rm -rf \"%s\"",
+                [[PackageAssistant getPackageFile: objcname]
+                        cStringUsingEncoding:NSUTF8StringEncoding]);
+#ifdef __HELPER_DEBUG__                
             NSLog(@"About to execute: %s", cmd);
 #endif
             system(cmd);
+            
+            free(buf);
+            
+            // return ok
+            len = 1;
+            write(fileno(stdout), &len, sizeof(len));
+        
         }
-        
-        // remove receipt
-        sprintf(cmd, "/bin/rm -rf \"%s\"",
-            [[PackageAssistant getPackageFile: objcname]
-                    cStringUsingEncoding:NSUTF8StringEncoding]);
-#ifdef __HELPER_DEBUG__                
-        NSLog(@"About to execute: %s", cmd);
-#endif
-        system(cmd);
-        
-        free(buf);
-        
-        // return ok
-        len = 1;
-        write(fileno(stdout), &len, sizeof(len));
-        
-        [pool release];
     }
     
     return 0;

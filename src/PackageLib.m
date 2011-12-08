@@ -45,10 +45,8 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
     rawoutput = [[NSString alloc] initWithData: result
                 encoding: NSASCIIStringEncoding];
 
-    [task release];
-    [outputPipe release];
 
-    return [rawoutput autorelease];
+    return rawoutput;
 }
 
 + (NSArray*)listPackages
@@ -63,36 +61,34 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
     {
         if ([[file pathExtension] isEqualToString: @"pkg"])
         {
-            NSAutoreleasePool *pool = [NSAutoreleasePool new];
+            @autoreleasepool {
         
             // get the extension out
-            NSString *name = [[NSString alloc] initWithString:
-                [file substringToIndex:[file length] - 4]];
-            
-            // create package
-            Package *pkg = [Package new];
-            
-            // set name
-            [pkg setName:name];
-            
-            // set the base directory (where the package was installed)
-            NSString *basedir = [PackageAssistant getPackageBaseDir:name];
-            [pkg setBaseDirectory:basedir];
-            
-            // check if it an APPLE package
-            [pkg setApple:[PackageAssistant isApplePackage:name]];
-            
-            // add the package
-            [ret addObject:pkg];
-            
-            // cleanup
-            [name release];
-            [pkg release];
-            [pool release];
+                NSString *name = [[NSString alloc] initWithString:
+                    [file substringToIndex:[file length] - 4]];
+                
+                // create package
+                Package *pkg = [Package new];
+                
+                // set name
+                [pkg setName:name];
+                
+                // set the base directory (where the package was installed)
+                NSString *basedir = [PackageAssistant getPackageBaseDir:name];
+                [pkg setBaseDirectory:basedir];
+                
+                // check if it an APPLE package
+                [pkg setApple:[PackageAssistant isApplePackage:name]];
+                
+                // add the package
+                [ret addObject:pkg];
+                
+                // cleanup
+            }
         }
     }
     
-    return [ret autorelease];
+    return ret;
 }
 
 + (NSMutableArray*)getPackageDependencies:(NSString*)pkg
@@ -116,8 +112,6 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
         [output componentsSeparatedByString:@"\n"]];
     
     // clean
-    [args release];
-    [output release];
     
     // create a dependency object for each file
     int i;
@@ -130,14 +124,12 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
             [dep setFilename:[files objectAtIndex:i]];
             [ret addObject:dep];
             
-            [dep release];
         }
     }
     
     // cleanup
-    [files release];
     
-    return [ret autorelease];
+    return ret;
 }
 
 + (bool)checkDependencies:(Package*)pkg fast:(bool)f
@@ -203,7 +195,6 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
     if(!plist)
     {
         NSLog(@"%@", error);
-        [error release];
     }
 
     NSString *tmpdir = [plistdic objectForKey:@"IFPkgRelocatedPath"];
@@ -229,7 +220,6 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
     if(!plist)
     {
         NSLog(@"%@", error);
-        [error release];
     }
 
     NSString *bundleid = [plistdic objectForKey:@"CFBundleIdentifier"];

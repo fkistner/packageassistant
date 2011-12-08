@@ -10,10 +10,6 @@ look at it for more information.
 
 @implementation PackagesController
 
-- (void)dealloc
-{
-    [super dealloc];
-}
 
 - (NSString*)searchString
 {
@@ -24,7 +20,6 @@ look at it for more information.
 {
     if (_searchString != str)
 	{
-        [_searchString release];
         _searchString = [str copy];
     }
 }
@@ -52,7 +47,7 @@ look at it for more information.
 	NSEnumerator *oEnum = [objects objectEnumerator];
     while (item = [oEnum nextObject])
 	{
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+        @autoreleasepool {
         NSString *lowerName = [[item valueForKeyPath:@"name"] lowercaseString];
         
         if ([lowerName rangeOfString:lowerSearch].location != NSNotFound)
@@ -60,7 +55,7 @@ look at it for more information.
             [matchedObjects addObject:item];
         }
         
-        [pool release];
+        }
     }
     
     return [super arrangeObjects:matchedObjects];

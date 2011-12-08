@@ -21,12 +21,6 @@ look at it for more information.
     return self;
 }
 
-- (void)dealloc
-{
-    [_filename release];
-
-    [super dealloc];
-}
 
 - (NSString*)filename
 {
@@ -55,7 +49,6 @@ look at it for more information.
 
 - (void)setFilename:(NSString*)name
 {
-    [_filename release];
     _filename = [[NSString alloc] initWithString: [name substringFromIndex:1]];
 }
 

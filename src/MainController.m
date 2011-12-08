@@ -18,9 +18,9 @@ look at it for more information.
 - (void)awakeFromNib
 {
     // register image transformers
-    id pst = [[[PackageStateTransformer alloc] init] autorelease];
-    id dst = [[[DependencyStateTransformer alloc] init] autorelease];
-    id pat = [[[PackageAppleTransformer alloc] init] autorelease];
+    id pst = [[PackageStateTransformer alloc] init];
+    id dst = [[DependencyStateTransformer alloc] init];
+    id pat = [[PackageAppleTransformer alloc] init];
         
     [NSValueTransformer
         setValueTransformer:pst
@@ -52,12 +52,6 @@ look at it for more information.
     return self;
 }
 
-- (void)dealloc
-{
-    [_packages release];
-    
-    [super dealloc];
-}
 
 - (NSMutableArray*) packages
 {
@@ -68,7 +62,6 @@ look at it for more information.
 {
     if(_packages != newPackages)
     {
-        [_packages release];
         _packages = [[NSMutableArray alloc] initWithArray: newPackages];
     }
 }

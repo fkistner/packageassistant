@@ -23,12 +23,6 @@ look at it for more information.
     return self;
 }
 
-- (void)dealloc
-{
-    [lock release];
-    [super dealloc];
-}
-
 - (IBAction)check:(id)sender
 {   
     [NSApp beginSheet:sheet modalForWindow:mainWindow
@@ -117,7 +111,7 @@ look at it for more information.
     bool localcancel = false;
     for(i = 0; i < [packages count] && !localcancel; ++i)
     {
-        NSAutoreleasePool *pool = [NSAutoreleasePool new];
+        @autoreleasepool {
         
         Package *pkg = [packages objectAtIndex:i];
         
@@ -143,7 +137,7 @@ look at it for more information.
                 [pkg setOk];
         }
 
-        [pool release];
+        }
         
         // move progress bar
         [progress incrementBy:1.0];
@@ -194,7 +188,7 @@ look at it for more information.
     bool localcancel = false;
     for(i = 0; i < [filteredArray count] && !localcancel; ++i)
     {
-        NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+        @autoreleasepool {
         Package *pkg = [filteredArray objectAtIndex:i];
         
         // set actual package
@@ -210,7 +204,7 @@ look at it for more information.
         write(fileno(pipe), n, len);
         read(fileno(pipe), &len, sizeof(len));
                             
-        [pool release];
+        }
         
         // move progress bar
         [progress incrementBy:1.0];

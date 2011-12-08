@@ -25,14 +25,6 @@ look at it for more information.
     return self;
 }
 
-- (void)dealloc
-{
-    [_name release];
-    [_basedir release];
-    [_dependencies release];
-
-    [super dealloc];
-}
 
 - (NSString*)name
 {
@@ -67,8 +59,7 @@ look at it for more information.
 - (void)setDependencies:(id)dependencies
 {
     // set dependencies pointer
-    [_dependencies release];
-    _dependencies = [dependencies retain];
+    _dependencies = dependencies;
     
     // update package state
     int i = 0;
@@ -124,14 +115,12 @@ look at it for more information.
 
 - (void)setName:(NSString *)name
 {
-    [_name release];
-    _name = [name retain];
+    _name = name;
 }
 
 - (void)setBaseDirectory:(NSString *)dir
 {
-    [_basedir release];
-    _basedir = [dir retain];
+    _basedir = dir;
 }
 
 @end
