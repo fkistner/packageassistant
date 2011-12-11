@@ -148,7 +148,7 @@ look at it for more information.
     }
 
     // show changes in the table
-    [packagesTable reloadData];
+    [detailsTable reloadData];
     
     [closeButton setTitle:@"Close"];
     [packageLabel setStringValue:@"Done!"];
@@ -170,19 +170,13 @@ look at it for more information.
 
     [progress setMaxValue:[filteredArray count]];
 
-    // call helper with root priviledges
-    OSStatus status;
-    AuthorizationFlags flags;
     FILE* pipe = NULL;
-    flags = kAuthorizationFlagDefaults;
 
     // get path
-    NSString *helper = [[NSBundle mainBundle]
-        pathForAuxiliaryExecutable:@"RemoveHelper"];
+    const char *helperPath = [[[NSBundle mainBundle] pathForAuxiliaryExecutable:@"RemoveHelper"] UTF8String];
 
-    // run
-    status = AuthorizationExecuteWithPrivileges(authRef,
-        [helper cStringUsingEncoding:NSUTF8StringEncoding], flags, NULL, &pipe);
+    // call helper with root priviledges
+    AuthorizationExecuteWithPrivileges(authRef, helperPath, kAuthorizationFlagDefaults, NULL, &pipe);
 
     int i;
     bool localcancel = false;

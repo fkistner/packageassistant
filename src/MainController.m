@@ -120,12 +120,4 @@ look at it for more information.
     [packagesTable reloadData];
 }
 
-- (NSString*)version
-{
-    // setup version text
-    NSString *bundlver = [BuildInformation getBundleVersion];
-    NSString *revnum = [BuildInformation getSourceRevision];
-    return [NSString stringWithFormat:@"Version %@r%@", bundlver, revnum];
-}
-
 @end

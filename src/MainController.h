@@ -33,6 +33,4 @@ look at it for more information.
 - (void)setPackages:(NSMutableArray*)newPackages;
 - (void)tableViewSelectionDidChange:(NSNotification *)notification;
 
-- (NSString*)version;
-
 @end

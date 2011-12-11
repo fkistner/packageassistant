@@ -13,7 +13,7 @@ look at it for more information.
 @interface SheetController : NSWindowController
 {
     IBOutlet NSPanel *sheet;
-    IBOutlet NSTableView *packagesTable;
+    IBOutlet NSTableView *detailsTable;
     IBOutlet NSButton *closeButton;
     IBOutlet NSWindow *mainWindow;
     IBOutlet NSArrayController *packagesController;
@@ -26,7 +26,6 @@ look at it for more information.
 }
 
 - (id)init;
-- (void)dealloc;
 
 - (IBAction)check:(id)sender;
 - (IBAction)cancel:(id)sender;

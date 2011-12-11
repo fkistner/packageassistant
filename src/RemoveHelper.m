@@ -13,19 +13,22 @@ look at it for more information.
 #import <string.h>
 #import <Cocoa/Cocoa.h>
 
-int longestFirst(PackageDependency *a, PackageDependency *b, void *ctx)
+NSComparisonResult longestFirst(id a, id b, void *ctx)
 {
-    if([[a filename] length] == [[b filename] length])
+    NSUInteger aLength = [[a filename] length];
+    NSUInteger bLength = [[b filename] length];
+
+    if(aLength == bLength)
     {
-        return 0;
+        return NSOrderedSame;
     }
-    else if([[a filename] length] > [[b filename] length])
+    else if(aLength > bLength)
     {
-        return -1;
+        return NSOrderedAscending;
     }
     else
     {
-        return 1;
+        return NSOrderedDescending;
     }
 }
 
@@ -55,7 +58,7 @@ int main(int argc, char *argv[])
             NSString *basedir = [PackageAssistant getPackageBaseDir:objcname];
             NSArray *pdeps = [PackageAssistant getPackageDependencies:objcname];
             NSMutableArray *deps = [NSMutableArray arrayWithArray:pdeps];
-            [deps sortUsingFunction:&longestFirst context:nil];
+            [deps sortUsingFunction:longestFirst context:nil];
             
             int i;
             for(i = 0; i < [deps count]; i++)
