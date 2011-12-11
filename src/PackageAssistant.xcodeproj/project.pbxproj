@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		17E83E011494F1B7002243CF /* AssistantResources.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17E83E001494F1B7002243CF /* AssistantResources.xib */; };
+		17E6EB9914955E8600201200 /* AssistantResources.nib in Resources */ = {isa = PBXBuildFile; fileRef = 17E6EB9714955E8600201200 /* AssistantResources.nib */; };
 		771B47890D8565C20050DC1C /* PackagesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771B47880D8565C20050DC1C /* PackagesController.m */; };
 		771C7E690C4C756800E5070D /* PackageStateTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 771C7E680C4C756800E5070D /* PackageStateTransformer.m */; };
 		771C7EC10C4C788400E5070D /* DependencyStateTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 771C7EC00C4C788400E5070D /* DependencyStateTransformer.m */; };
@@ -88,7 +88,7 @@
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
-		17E83E001494F1B7002243CF /* AssistantResources.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AssistantResources.xib; sourceTree = "<group>"; };
+		17E6EB9814955E8600201200 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/AssistantResources.nib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* PackageAssistant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageAssistant.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
@@ -236,7 +236,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				17E83E001494F1B7002243CF /* AssistantResources.xib */,
+				17E6EB9714955E8600201200 /* AssistantResources.nib */,
 				77CBE8250E932ACC001F567E /* apple.tiff */,
 				77CBE8200E932A82001F567E /* warning.tiff */,
 				779D951E0E74A5B600C6DA0A /* check.png */,
@@ -412,7 +412,7 @@
 				779D951F0E74A5B600C6DA0A /* check.png in Resources */,
 				77CBE8210E932A82001F567E /* warning.tiff in Resources */,
 				77CBE8260E932ACC001F567E /* apple.tiff in Resources */,
-				17E83E011494F1B7002243CF /* AssistantResources.xib in Resources */,
+				17E6EB9914955E8600201200 /* AssistantResources.nib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +481,14 @@
 				089C165DFE840E0CC02AAC07 /* English */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		17E6EB9714955E8600201200 /* AssistantResources.nib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17E6EB9814955E8600201200 /* English */,
+			);
+			name = AssistantResources.nib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
