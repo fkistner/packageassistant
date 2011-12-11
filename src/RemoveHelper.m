@@ -13,25 +13,6 @@ look at it for more information.
 #import <string.h>
 #import <Cocoa/Cocoa.h>
 
-NSComparisonResult longestFirst(id a, id b, void *ctx)
-{
-    NSUInteger aLength = [[a filename] length];
-    NSUInteger bLength = [[b filename] length];
-
-    if(aLength == bLength)
-    {
-        return NSOrderedSame;
-    }
-    else if(aLength > bLength)
-    {
-        return NSOrderedAscending;
-    }
-    else
-    {
-        return NSOrderedDescending;
-    }
-}
-
 int main(int argc, char *argv[])
 {
     long len;
@@ -58,7 +39,23 @@ int main(int argc, char *argv[])
             NSString *basedir = [PackageAssistant getPackageBaseDir:objcname];
             NSArray *pdeps = [PackageAssistant getPackageDependencies:objcname];
             NSMutableArray *deps = [NSMutableArray arrayWithArray:pdeps];
-            [deps sortUsingFunction:longestFirst context:nil];
+
+            [deps sortUsingComparator:^NSComparisonResult(id a, id b) {
+                NSUInteger aLength = [[a filename] length];
+                NSUInteger bLength = [[b filename] length];
+                if(aLength == bLength)
+                {
+                    return NSOrderedSame;
+                }
+                else if(aLength > bLength)
+                {
+                    return NSOrderedAscending;
+                }
+                else
+                {
+                    return NSOrderedDescending;
+                }
+            }];
             
             int i;
             for(i = 0; i < [deps count]; i++)

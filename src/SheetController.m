@@ -129,7 +129,7 @@ look at it for more information.
                 getPackageDependencies:[pkg name]];
                 
             bool error = [PackageAssistant checkDependenciesArray:deps
-                basedir:[pkg basedir] fast:true];
+                basedir:[pkg baseDirectory] fast:true];
                 
             if(error)
                 [pkg setBroken];

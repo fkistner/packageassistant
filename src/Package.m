@@ -10,12 +10,12 @@ look at it for more information.
 
 @implementation Package
 
-- (id)init
+- (id)initWithName:(NSString *)name baseDirectory:(NSString *)basedir apple:(bool)apple
 {
     if(self = [super init])
     {
-        _name = [[NSString alloc] initWithString:@"Unknown"];
-        _basedir = [[NSString alloc] initWithString:@"Unknown"];
+        _name = name;
+        _basedir = basedir;
         _remove = [NSNumber numberWithBool:false];
         _state = 0;
         _apple = false;
@@ -25,36 +25,12 @@ look at it for more information.
     return self;
 }
 
-
-- (NSString*)name
-{
-    return _name;
-}
-
-- (NSString*)basedir
-{
-    return _basedir;
-}
-
-- (NSNumber*)remove
-{
-    return _remove;
-}
-
-- (int)state
-{
-    return _state;
-}
-
-- (bool)isApple
-{
-    return _apple;
-}
-
-- (NSArray*)dependencies
-{
-    return _dependencies;
-}
+@synthesize name = _name;
+@synthesize baseDirectory = _basedir;
+@synthesize remove = _remove;
+// handle state differently
+@synthesize dependencies = _dependencies;
+@synthesize apple = _apple;
 
 - (void)setDependencies:(id)dependencies
 {
@@ -78,6 +54,11 @@ look at it for more information.
     [_dependencies removeAllObjects];
 }
 
+- (bool)isUnknown
+{
+    return (_state == 0);
+}
+
 - (bool)isOk
 {
     return (_state == 1);
@@ -86,11 +67,6 @@ look at it for more information.
 - (bool)isBroken
 {
     return (_state == 2);
-}
-
-- (bool)isUnknown
-{
-    return (_state == 0);
 }
 
 - (void)setUnknown
@@ -106,21 +82,6 @@ look at it for more information.
 - (void)setBroken
 {
     _state = 2;
-}
-
-- (void)setApple:(bool)ap
-{
-    _apple = ap;
-}
-
-- (void)setName:(NSString *)name
-{
-    _name = name;
-}
-
-- (void)setBaseDirectory:(NSString *)dir
-{
-    _basedir = dir;
 }
 
 @end

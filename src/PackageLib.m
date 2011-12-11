@@ -62,28 +62,21 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
         if ([[file pathExtension] isEqualToString: @"pkg"])
         {
             @autoreleasepool {
-        
-            // get the extension out
+                // get the extension out
                 NSString *name = [[NSString alloc] initWithString:
                     [file substringToIndex:[file length] - 4]];
                 
-                // create package
-                Package *pkg = [Package new];
-                
-                // set name
-                [pkg setName:name];
-                
-                // set the base directory (where the package was installed)
+                // get the base directory (where the package was installed)
                 NSString *basedir = [PackageAssistant getPackageBaseDir:name];
-                [pkg setBaseDirectory:basedir];
                 
                 // check if it an APPLE package
-                [pkg setApple:[PackageAssistant isApplePackage:name]];
+                bool apple = [PackageAssistant isApplePackage:name];
+                
+                // create package
+                Package *pkg = [[Package alloc] initWithName:name baseDirectory:basedir apple:apple];
                 
                 // add the package
                 [ret addObject:pkg];
-                
-                // cleanup
             }
         }
     }
@@ -111,8 +104,6 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
     NSArray *files = [[NSArray alloc] initWithArray:
         [output componentsSeparatedByString:@"\n"]];
     
-    // clean
-    
     // create a dependency object for each file
     int i;
     for(i = 0; i < [files count]; ++i)
@@ -127,15 +118,13 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
         }
     }
     
-    // cleanup
-    
     return ret;
 }
 
 + (bool)checkDependencies:(Package*)pkg fast:(bool)f
 {
     bool error = [PackageAssistant checkDependenciesArray:[pkg dependencies]
-        basedir:[pkg basedir] fast:f];
+        basedir:[pkg baseDirectory] fast:f];
         
     if(error)
         [pkg setBroken];

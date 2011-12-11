@@ -30,23 +30,19 @@ look at it for more information.
     bool _apple;
 }
 
-- (NSString*)name;
-- (NSString*)basedir;
-- (NSNumber*)remove;
-- (int)state;
-- (NSArray*)dependencies;
-- (bool)isApple;
+@property (readwrite,retain,nonatomic) NSString *name;
+@property (readwrite,retain,nonatomic) NSString *baseDirectory;
+@property (readwrite,retain,nonatomic) NSNumber *remove;
+@property (readwrite,retain,nonatomic) NSArray *dependencies;
+@property (readwrite,assign,nonatomic) bool apple;
 
-- (void)setDependencies:(id)dependencies;
+- (id)initWithName:(NSString *)name baseDirectory:(NSString *)basedir apple:(bool)apple;
 - (void)clearDependencies;
 - (void)setUnknown;
 - (void)setOk;
 - (void)setBroken;
-- (void)setName:(NSString *)name;
-- (void)setBaseDirectory:(NSString *)dir;
-- (void)setApple:(bool)ap;
-- (bool)isOk;
 - (bool)isUnknown;
+- (bool)isOk;
 - (bool)isBroken;
 
 @end
