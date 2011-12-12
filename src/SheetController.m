@@ -13,25 +13,37 @@ look at it for more information.
 
 @implementation SheetController
 
-- (id)init
-{
-    if(self = [super init])
-    {
-        lock = [NSLock new];
-    }
-    
-    return self;
-}
-
 - (IBAction)check:(id)sender
 {   
     [NSApp beginSheet:sheet modalForWindow:mainWindow
         modalDelegate:self didEndSelector:nil contextInfo:nil];
     
-    canceled = false;
+    closeButton.title = @"Cancel";
+    packageLabel.stringValue = @"Initializing...";
+    titleLabel.stringValue = @"Wait while checking the packages...";
+    progress.doubleValue = 0.0;
     
-    [NSThread detachNewThreadSelector:@selector(checkThread:)
-        toTarget:self withObject:nil];
+    NSMutableArray *packages = packagesController.arrangedObjects;
+    progress.maxValue = packages.count;
+    
+    for(Package *pkg in packages)
+    {
+        // set actual package
+        packageLabel.stringValue = [NSString stringWithFormat:@"Checking package: %@...", pkg.name];
+        
+        // force redraw
+        [packageLabel display];
+        
+        [pkg determineState];
+        
+        // move progress bar
+        [progress incrementBy:1.0];
+    }
+    
+    packageLabel.stringValue = @"Done!";
+    
+    [sheet orderOut:nil];
+    [NSApp endSheet:sheet];
 }
 
 - (IBAction)remove:(id)sender
@@ -84,133 +96,77 @@ look at it for more information.
         [NSApp beginSheet:sheet modalForWindow:mainWindow
             modalDelegate:self didEndSelector:nil contextInfo:nil];
         
-        canceled = false;
-
-        [NSThread detachNewThreadSelector:@selector(removeThread:)
-                                 toTarget:self withObject:^AuthorizationRef{
-                                     return authRef;
-                                 }];
+//        canceled = false;
+//
+//        [NSThread detachNewThreadSelector:@selector(removeThread:)
+//                                 toTarget:self withObject:^AuthorizationRef{
+//                                     return authRef;
+//                                 }];
     }
-}
-
-// checker thread
-- (void)checkThread:(id)obj
-{
-    closeButton.title = @"Cancel";
-    packageLabel.stringValue = @"Initializing...";
-    titleLabel.stringValue = @"Wait while checking the packages...";
-    progress.doubleValue = 0.0;
-    
-    NSMutableArray *packages = packagesController.arrangedObjects;
-    progress.maxValue = packages.count;
-    
-    for(Package *pkg in packages)
-    {
-        @autoreleasepool {
-            // set actual package
-            packageLabel.stringValue = [NSString stringWithFormat:@"Checking package: %@...", pkg.name];
-            
-            // force redraw
-            [packageLabel display];
-            
-//            if(pkg.state == StateUnknown)
-//            {
-//                // check package dependencies
-//                NSArray *deps = [PackageAssistant getPackageDependencies:pkg.name];
-//                
-//                bool error = [PackageAssistant checkDependenciesArray:deps basedir:pkg.baseDirectory fast:true];
-//                if(error)
-//                    pkg.state = StateBroken;
-//                else
-//                    pkg.state = StateOk;
-//            }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [pkg determineDependencies];
-            });
-        }
-        
-        // move progress bar
-        [progress incrementBy:1.0];
-        
-        [lock lock];
-        if (canceled)
-            break;
-        [lock unlock];
-    }
-
-    // show changes in the table
-    [detailsTable reloadData];
-    
-    closeButton.title = @"Close";
-    packageLabel.stringValue = @"Done!";
 }
 
 // remover thread
-- (void)removeThread:(id)obj
-{
-    AuthorizationRef (^getAuthRef)() = obj;
-    AuthorizationRef authRef = getAuthRef();
-
-    closeButton.title = @"Cancel";
-    packageLabel.stringValue = @"Initializing...";
-    titleLabel.stringValue = @"Wait while removing the packages...";
-    progress.doubleValue = 0.0;
-
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remove = 1"];
-    NSMutableArray *packages = packagesController.arrangedObjects;
-    NSArray *filteredArray = [packages filteredArrayUsingPredicate:predicate];
-
-    [progress setMaxValue:filteredArray.count];
-
-    FILE* pipe = NULL;
-
-    // get path
-    const char *helperPath = [NSBundle.mainBundle pathForAuxiliaryExecutable:@"RemoveHelper"].UTF8String;
-
-    // call helper with root priviledges
-    AuthorizationExecuteWithPrivileges(authRef, helperPath, kAuthorizationFlagDefaults, NULL, &pipe);
-
-    for(Package *pkg in filteredArray)
-    {
-        @autoreleasepool {            
-            // set actual package
-            packageLabel.stringValue = [NSString stringWithFormat:@"Removing package: %@...", pkg.name];
-            
-            // force redraw
-            [packageLabel display];
-            
-            const char *n = pkg.name.UTF8String;
-            long len = strlen(n);
-            write(fileno(pipe), &len, sizeof(len));
-            write(fileno(pipe), n, len);
-            read(fileno(pipe), &len, sizeof(len));   
-        }
-        
-        // move progress bar
-        [progress incrementBy:1.0];
-        
-        [lock lock];
-        if (canceled)
-            break;
-        [lock unlock];
-    }
-
-    // close pipe
-    fclose(pipe);
-
-    // free authorization
-    AuthorizationFree(authRef, kAuthorizationFlagDefaults);
-    
-    closeButton.title = @"Close";
-    packageLabel.stringValue = @"Done!";
-}
+//- (void)removeThread:(id)obj
+//{
+//    AuthorizationRef (^getAuthRef)() = obj;
+//    AuthorizationRef authRef = getAuthRef();
+//
+//    closeButton.title = @"Cancel";
+//    packageLabel.stringValue = @"Initializing...";
+//    titleLabel.stringValue = @"Wait while removing the packages...";
+//    progress.doubleValue = 0.0;
+//
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"remove = 1"];
+//    NSMutableArray *packages = packagesController.arrangedObjects;
+//    NSArray *filteredArray = [packages filteredArrayUsingPredicate:predicate];
+//
+//    [progress setMaxValue:filteredArray.count];
+//
+//    FILE* pipe = NULL;
+//
+//    // get path
+//    const char *helperPath = [NSBundle.mainBundle pathForAuxiliaryExecutable:@"RemoveHelper"].UTF8String;
+//
+//    // call helper with root priviledges
+////    AuthorizationExecuteWithPrivileges(authRef, helperPath, kAuthorizationFlagDefaults, NULL, &pipe);
+//
+//    for(Package *pkg in filteredArray)
+//    {
+//        @autoreleasepool {            
+//            // set actual package
+//            packageLabel.stringValue = [NSString stringWithFormat:@"Removing package: %@...", pkg.name];
+//            
+//            // force redraw
+//            [packageLabel display];
+//            
+//            const char *n = pkg.name.UTF8String;
+//            long len = strlen(n);
+//            write(fileno(pipe), &len, sizeof(len));
+//            write(fileno(pipe), n, len);
+//            read(fileno(pipe), &len, sizeof(len));   
+//        }
+//        
+//        // move progress bar
+//        [progress incrementBy:1.0];
+//        
+//        [lock lock];
+//        if (canceled)
+//            break;
+//        [lock unlock];
+//    }
+//
+//    // close pipe
+//    fclose(pipe);
+//
+//    // free authorization
+//    AuthorizationFree(authRef, kAuthorizationFlagDefaults);
+//    
+//    closeButton.title = @"Close";
+//    packageLabel.stringValue = @"Done!";
+//}
 
 - (IBAction)cancel:(id)sender
 {
-    [lock lock];
-    canceled = true;
-    [lock unlock];
-
     [sheet orderOut:nil];
     [NSApp endSheet:sheet];
 }

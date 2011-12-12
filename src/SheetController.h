@@ -20,16 +20,10 @@ look at it for more information.
     IBOutlet NSTextField *packageLabel;
     IBOutlet NSTextField *titleLabel;
     IBOutlet NSProgressIndicator *progress;
-    
-    NSLock *lock;
-    bool canceled;
 }
 
 - (IBAction)check:(id)sender;
 - (IBAction)cancel:(id)sender;
 - (IBAction)remove:(id)sender;
-
-- (void)checkThread:(id)obj;
-- (void)removeThread:(id)obj;
 
 @end

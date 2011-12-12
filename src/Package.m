@@ -10,7 +10,7 @@ look at it for more information.
 
 @implementation Package
 
-- (Package *)initWithReceipt:(PKReceipt *)receipt
+- (Package *)initWithReceipt:(PKReceipt *)receipt andTargetQueue:(dispatch_queue_t)targetQueue
 {
     if(self = [super init])
     {
@@ -37,8 +37,9 @@ look at it for more information.
 //        _receipt = receipt;
         _bom = receipt._BOM;
         
-        _deps = [NSArray array];
-        _depsUndetermined = YES;
+        _queue = dispatch_queue_create("PackageDependency", NULL);
+        dispatch_set_target_queue(_queue, targetQueue);
+        _deps = nil;
         
         // initalize defaults
         _remove  = [NSNumber numberWithBool:false];
@@ -55,13 +56,10 @@ look at it for more information.
 @synthesize state = _state;
 @synthesize remove = _remove;
 
-
-- (void)determineDependencies
+- (void)determineState
 {
-    if (_depsUndetermined) {
-        dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0ul);
-        dispatch_async(queue, ^{
-            __block NSMutableArray *deps = [NSMutableArray arrayWithCapacity:_bom.fileCount];
+    dispatch_async(_queue, ^{
+        if (self.state == StateUnknown) {
             NSFileManager *fm = NSFileManager.defaultManager;
             bool fine = YES;
             
@@ -72,31 +70,56 @@ look at it for more information.
                 {
                     NSString *fullPath =  [_basedir stringByAppendingPathComponent: filename];
                     
-                    PackageDependency *dep = [[PackageDependency alloc] initWithFilename:fullPath];
-                    
                     // check file existance appending base dir to the dependency
                     if(![fm fileExistsAtPath:fullPath]) {
                         fine = NO;
-                        [dep setBroken:YES];
+                        break;
                     }
-                    
-                    [deps addObject:dep];
                 }
             }
             
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.dependencies = deps;
+            dispatch_sync(dispatch_get_main_queue(), ^{
                 self.state = (fine ? StateOk : StateBroken);
             });
-        });
-        _depsUndetermined = NO;
-    }
+        }
+    });    
 }
 
 - (NSArray *)dependencies
 {
-    if (_depsUndetermined) 
-        [self determineDependencies];
+    if (_deps == nil)
+        dispatch_async(_queue, ^{
+            if (self.dependencies == nil) {
+                __block NSMutableArray *deps = [NSMutableArray arrayWithCapacity:_bom.fileCount];
+                __block bool fine = YES;
+                
+                NSFileManager *fm = NSFileManager.defaultManager;
+                
+                // update package state
+                for (NSString *filename in _bom.directoryEnumerator)
+                {
+                    if(filename.length > 0)
+                    {
+                        NSString *fullPath =  [_basedir stringByAppendingPathComponent: filename];
+                        
+                        PackageDependency *dep = [[PackageDependency alloc] initWithFilename:fullPath];
+                        
+                        // check file existance appending base dir to the dependency
+                        if(![fm fileExistsAtPath:fullPath]) {
+                            fine = NO;
+                            [dep setBroken:YES];
+                        }
+                        
+                        [deps addObject:dep];
+                    }
+                }
+                
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    self.dependencies = deps;
+                    self.state = (fine ? StateOk : StateBroken);
+                });
+            }
+        });
     return _deps;
 }
 

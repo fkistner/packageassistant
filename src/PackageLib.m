@@ -13,7 +13,22 @@
 
 @implementation PackageAssistant
 
-+ (NSArray*)listPackages
++ (id)sharedInstance
+{
+    static dispatch_once_t pred = 0;
+    __strong static PackageAssistant *p = nil;
+    dispatch_once(&pred, ^{
+        p = [[self alloc] init];
+    });
+    return p;
+}
+
+-(id)init
+{
+    _queue = dispatch_queue_create("Packages", DISPATCH_QUEUE_CONCURRENT);
+}
+
+- (NSArray*)listPackages
 {
     NSArray *receipts = [PKReceipt receiptsOnVolumeAtPath:@"/"];
     NSMutableArray *ret = [NSMutableArray arrayWithCapacity:receipts.count];
@@ -21,13 +36,20 @@
     for(PKReceipt *receipt in receipts)
     {
         // create package
-        Package *pkg = [[Package alloc] initWithReceipt:receipt];
+        Package *pkg = [[Package alloc] initWithReceipt:receipt andTargetQueue:_queue];
+        
+        [pkg determineState];
         
         // add the package
         [ret addObject:pkg];
     }
     
     return ret;
+}
+
+-(void)cancel
+{
+    
 }
 
 @end

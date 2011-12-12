@@ -29,8 +29,8 @@ enum PackageState { StateUnknown, StateOk, StateBroken };
     PKBOM *_bom;
     
     // files this package depends on
+    dispatch_queue_t _queue;
     NSMutableArray *_deps;
-    bool _depsUndetermined;
     
     // package state
     enum PackageState _state;
@@ -47,8 +47,8 @@ enum PackageState { StateUnknown, StateOk, StateBroken };
 @property (readwrite,assign,nonatomic) enum PackageState state;
 @property (readwrite,retain,nonatomic) NSNumber *remove;
 
-- (Package *)initWithReceipt:(PKReceipt *)receipt;
-- (void)determineDependencies;
+- (Package *)initWithReceipt:(PKReceipt *)receipt andTargetQueue:(dispatch_queue_t)targetQueue;
+- (void)determineState;
 - (void)clearDependencies;
 
 @end

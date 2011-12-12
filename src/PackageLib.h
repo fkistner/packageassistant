@@ -10,7 +10,12 @@ look at it for more information.
 #import "Package.h"
 
 @interface PackageAssistant : NSObject
+{
+    @private   
+    dispatch_queue_t _queue;
+}
 
-+ (NSArray*)listPackages;
++ (id)sharedInstance;
+- (NSArray*)listPackages;
 
 @end
