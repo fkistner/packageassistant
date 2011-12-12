@@ -68,8 +68,9 @@ look at it for more information.
     [self tableViewSelectionDidChange:nil];
     
     // select search field
-    NSTextField *textField = sender;
-    [textField selectText:self];
+    // FIXME: doSearch may be fired before the user has finished typing, therefore we might steal focus.
+    //NSTextField *textField = sender;
+    //[textField selectText:self];
 }
 
 // tableView
