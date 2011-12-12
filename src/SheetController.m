@@ -87,7 +87,9 @@ look at it for more information.
         canceled = false;
 
         [NSThread detachNewThreadSelector:@selector(removeThread:)
-            toTarget:self withObject:(__bridge id)authRef];
+                                 toTarget:self withObject:^AuthorizationRef{
+                                     return authRef;
+                                 }];
     }
 }
 
@@ -143,7 +145,8 @@ look at it for more information.
 // remover thread
 - (void)removeThread:(id)obj
 {
-    AuthorizationRef authRef = (__bridge AuthorizationRef) obj;
+    AuthorizationRef (^getAuthRef)() = obj;
+    AuthorizationRef authRef = getAuthRef();
 
     closeButton.title = @"Cancel";
     packageLabel.stringValue = @"Initializing...";

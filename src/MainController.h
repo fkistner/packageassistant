@@ -19,7 +19,7 @@ look at it for more information.
     IBOutlet NSTableView *packagesTable;
     IBOutlet NSTableView *detailsTable;
     IBOutlet NSWindow *mainWindow;
-    IBOutlet NSProgressIndicator *loading;
+    IBOutlet NSProgressIndicator *loadingIndicator;
     IBOutlet NSTextField *version;
             
     NSMutableArray *_packages;

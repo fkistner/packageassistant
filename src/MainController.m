@@ -86,7 +86,7 @@ look at it for more information.
         _lastSelectedPackage = [packagesController.selectedObjects objectAtIndex:0];
         
         // progress indicator GO
-        [loading startAnimation:self];
+        [loadingIndicator startAnimation:self];
         
         // get the package's dependencies
         NSArray *deps = [PackageAssistant getPackageDependencies:_lastSelectedPackage.name];
@@ -98,7 +98,7 @@ look at it for more information.
         [PackageAssistant checkDependencies:_lastSelectedPackage fast:false];   
 
         // progress indicator STOP
-        [loading stopAnimation:self];
+        [loadingIndicator stopAnimation:self];
     }
     
     [packagesTable reloadData];

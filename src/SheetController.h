@@ -25,8 +25,6 @@ look at it for more information.
     bool canceled;
 }
 
-- (id)init;
-
 - (IBAction)check:(id)sender;
 - (IBAction)cancel:(id)sender;
 - (IBAction)remove:(id)sender;

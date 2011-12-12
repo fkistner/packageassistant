@@ -22,9 +22,9 @@
 - (NSString*)version
 {
     // setup version text
-    NSString *bundlver = BuildInformation.bundleVersion;
-    NSString *revnum = BuildInformation.sourceRevision;
-    return [NSString stringWithFormat:@"Version %@r%@", bundlver, revnum];
+    return [NSString stringWithFormat:@"Version %@r%@",
+            BuildInformation.bundleVersion,
+            BuildInformation.sourceRevision];
 }
 
 @end
