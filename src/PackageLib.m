@@ -9,6 +9,7 @@ look at it for more information.
 #import "Package.h"
 #import "PackageLib.h"
 #import "PackageDependency.h"
+#import "PackageKit/PKReceipt.h"
 
 @implementation PackageAssistant
 
@@ -50,19 +51,16 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
 
 + (NSArray*)listPackages
 {
-    NSDirectoryEnumerator *direnum = [NSFileManager.defaultManager enumeratorAtPath:receiptsDirectory];
-    NSMutableArray *ret = [NSMutableArray new];
+    NSArray *receipts = [NSArray arrayWithArray:[PKReceipt receiptsOnVolumeAtPath:@"/"]];
 
-    for(NSString *file in direnum)
+    for(PKReceipt *receipt in receipts)
     {
-        if ([file.pathExtension isEqualToString:@"pkg"])
-        {
             @autoreleasepool {
                 // get the extension out
-                NSString *name = [[NSString alloc] initWithString:[file substringToIndex:file.length - 4]];
+                NSString *name = [NSString stringWithString:receipt.packageIdentifier];
                 
                 // get the base directory (where the package was installed)
-                NSString *basedir = [PackageAssistant getPackageBaseDir:name];
+                NSString *basedir = [NSString stringWithString:receipt.installPrefixPath];
                 
                 // check if it an APPLE package
                 bool apple = [PackageAssistant isApplePackage:name];
@@ -73,7 +71,6 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
                 // add the package
                 [ret addObject:pkg];
             }
-        }
     }
     
     return ret;
