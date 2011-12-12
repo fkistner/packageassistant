@@ -12,12 +12,5 @@ look at it for more information.
 @interface PackageAssistant : NSObject
 
 + (NSArray*)listPackages;
-+ (NSString*)getPackageFile:(NSString*)name;
-+ (NSString*)getPackageBaseDir:(NSString*)name;
-+ (bool)isApplePackage:(NSString*)name;
-+ (NSMutableArray*)getPackageDependencies:(NSString*)pkg;
-
-+ (bool)checkDependencies:(Package*)pkg fast:(bool)fast;
-+ (bool)checkDependenciesArray:(NSArray*)deps basedir:(NSString*)dir fast:(bool)fast;
 
 @end

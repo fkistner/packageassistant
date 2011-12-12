@@ -12,6 +12,7 @@
 		17B2A23C14963A2200773687 /* PackageKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B2A23A149639FE00773687 /* PackageKit.framework */; };
 		17B2A23D14963A3B00773687 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
 		17B2A23E14963A4200773687 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97324FDCFA39411CA2CEA /* AppKit.framework */; };
+		17B2A26A14965B7200773687 /* PackageDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 17B2A2681496527200773687 /* PackageDependency.m */; };
 		17E6EB9914955E8600201200 /* AssistantResources.nib in Resources */ = {isa = PBXBuildFile; fileRef = 17E6EB9714955E8600201200 /* AssistantResources.nib */; };
 		771B47890D8565C20050DC1C /* PackagesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771B47880D8565C20050DC1C /* PackagesController.m */; };
 		771C7E690C4C756800E5070D /* PackageStateTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 771C7E680C4C756800E5070D /* PackageStateTransformer.m */; };
@@ -26,8 +27,6 @@
 		7765E70E0D3EDE67004C23BA /* PackageLib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7765E6E40D3EDD96004C23BA /* PackageLib.dylib */; };
 		7765E7170D3EDEB6004C23BA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		7765E7220D3EDEDD004C23BA /* Package.h in Headers */ = {isa = PBXBuildFile; fileRef = 77861E7E0C3EC88F001AD945 /* Package.h */; settings = {ATTRIBUTES = (); }; };
-		7765E7230D3EDEE3004C23BA /* PackageDependency.h in Headers */ = {isa = PBXBuildFile; fileRef = 77861E880C3ECB7F001AD945 /* PackageDependency.h */; settings = {ATTRIBUTES = (); }; };
-		7765E7240D3EDEE6004C23BA /* PackageDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 77861E890C3ECB7F001AD945 /* PackageDependency.m */; };
 		7765E7250D3EDEEB004C23BA /* Package.m in Sources */ = {isa = PBXBuildFile; fileRef = 77861E7F0C3EC88F001AD945 /* Package.m */; };
 		778BD0BA0E6B887C0015CA4F /* BuildInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 778BD0B90E6B887C0015CA4F /* BuildInformation.m */; };
 		779D951C0E74A39100C6DA0A /* Package.icns in Resources */ = {isa = PBXBuildFile; fileRef = 779D951B0E74A39100C6DA0A /* Package.icns */; };
@@ -38,7 +37,6 @@
 		77D52D880BB01BD600331AB5 /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D52D870BB01BD600331AB5 /* MainController.m */; };
 		77F12DCA0D3F97AA00274DDD /* RemoveHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765E74B0D3EE037004C23BA /* RemoveHelper.m */; };
 		77F12DCF0D3F995E00274DDD /* PackageLib.dylib in Copy Extra Executables */ = {isa = PBXBuildFile; fileRef = 7765E6E40D3EDD96004C23BA /* PackageLib.dylib */; };
-		77F12DD30D3F997F00274DDD /* RemoveHelper in Copy Extra Executables */ = {isa = PBXBuildFile; fileRef = 77F12DBA0D3F971F00274DDD /* RemoveHelper */; };
 		77F12E700D3FB2E600274DDD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F12E6F0D3FB2E600274DDD /* Security.framework */; };
 		77F12EC60D3FB57400274DDD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		77F12EC90D3FB58000274DDD /* PackageLib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7765E6E40D3EDD96004C23BA /* PackageLib.dylib */; };
@@ -65,13 +63,6 @@
 			remoteGlobalIDString = 7765E6E30D3EDD96004C23BA;
 			remoteInfo = PackageLib;
 		};
-		77F12DBE0D3F973800274DDD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 77F12DB90D3F971F00274DDD;
-			remoteInfo = RemoveHelper;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -82,7 +73,6 @@
 			dstSubfolderSpec = 6;
 			files = (
 				77F12DCF0D3F995E00274DDD /* PackageLib.dylib in Copy Extra Executables */,
-				77F12DD30D3F997F00274DDD /* RemoveHelper in Copy Extra Executables */,
 			);
 			name = "Copy Extra Executables";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -94,6 +84,11 @@
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		17B2A23A149639FE00773687 /* PackageKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PackageKit.framework; path = /System/Library/PrivateFrameworks/PackageKit.framework; sourceTree = "<absolute>"; };
+		17B2A2641496484600773687 /* PKReceipt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PKReceipt.h; path = PackageKit/PKReceipt.h; sourceTree = "<group>"; };
+		17B2A26514964D4000773687 /* PKBOM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PKBOM.h; path = PackageKit/PKBOM.h; sourceTree = "<group>"; };
+		17B2A26614964DCD00773687 /* PKBOMDirectoryEnumerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PKBOMDirectoryEnumerator.h; path = PackageKit/PKBOMDirectoryEnumerator.h; sourceTree = "<group>"; };
+		17B2A2671496527200773687 /* PackageDependency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageDependency.h; sourceTree = "<group>"; };
+		17B2A2681496527200773687 /* PackageDependency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageDependency.m; sourceTree = "<group>"; };
 		17E6EB9814955E8600201200 /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/AssistantResources.nib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* PackageAssistant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageAssistant.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -116,8 +111,6 @@
 		7765E74B0D3EE037004C23BA /* RemoveHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoveHelper.m; sourceTree = "<group>"; };
 		77861E7E0C3EC88F001AD945 /* Package.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = Package.h; sourceTree = "<group>"; };
 		77861E7F0C3EC88F001AD945 /* Package.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = Package.m; sourceTree = "<group>"; };
-		77861E880C3ECB7F001AD945 /* PackageDependency.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = PackageDependency.h; sourceTree = "<group>"; };
-		77861E890C3ECB7F001AD945 /* PackageDependency.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = PackageDependency.m; sourceTree = "<group>"; };
 		778BD0B80E6B887C0015CA4F /* BuildInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildInformation.h; sourceTree = "<group>"; };
 		778BD0B90E6B887C0015CA4F /* BuildInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuildInformation.m; sourceTree = "<group>"; };
 		779D951B0E74A39100C6DA0A /* Package.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Package.icns; sourceTree = "<group>"; };
@@ -179,12 +172,13 @@
 		080E96DDFE201D6D7F000001 /* PackageLib */ = {
 			isa = PBXGroup;
 			children = (
+				17B2A2621496481900773687 /* PackageKit */,
 				77D52D890BB01BE800331AB5 /* PackageLib.h */,
 				77D52D8A0BB01BE800331AB5 /* PackageLib.m */,
 				77861E7E0C3EC88F001AD945 /* Package.h */,
 				77861E7F0C3EC88F001AD945 /* Package.m */,
-				77861E880C3ECB7F001AD945 /* PackageDependency.h */,
-				77861E890C3ECB7F001AD945 /* PackageDependency.m */,
+				17B2A2671496527200773687 /* PackageDependency.h */,
+				17B2A2681496527200773687 /* PackageDependency.m */,
 			);
 			name = PackageLib;
 			sourceTree = "<group>";
@@ -207,6 +201,16 @@
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		17B2A2621496481900773687 /* PackageKit */ = {
+			isa = PBXGroup;
+			children = (
+				17B2A26514964D4000773687 /* PKBOM.h */,
+				17B2A26614964DCD00773687 /* PKBOMDirectoryEnumerator.h */,
+				17B2A2641496484600773687 /* PKReceipt.h */,
+			);
+			name = PackageKit;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -319,7 +323,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7765E7220D3EDEDD004C23BA /* Package.h in Headers */,
-				7765E7230D3EDEE3004C23BA /* PackageDependency.h in Headers */,
 				7765E6EE0D3EDDDA004C23BA /* PackageLib.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,7 +377,6 @@
 			);
 			dependencies = (
 				77F12D920D3F942E00274DDD /* PBXTargetDependency */,
-				77F12DBF0D3F973800274DDD /* PBXTargetDependency */,
 			);
 			name = PackageAssistant;
 			productInstallPath = "$(HOME)/Applications";
@@ -435,9 +437,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7765E7240D3EDEE6004C23BA /* PackageDependency.m in Sources */,
 				7765E7250D3EDEEB004C23BA /* Package.m in Sources */,
 				7765E6EF0D3EDDDF004C23BA /* PackageLib.m in Sources */,
+				17B2A26A14965B7200773687 /* PackageDependency.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -478,11 +480,6 @@
 			isa = PBXTargetDependency;
 			target = 7765E6E30D3EDD96004C23BA /* PackageLib */;
 			targetProxy = 77F12DBC0D3F973000274DDD /* PBXContainerItemProxy */;
-		};
-		77F12DBF0D3F973800274DDD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 77F12DB90D3F971F00274DDD /* RemoveHelper */;
-			targetProxy = 77F12DBE0D3F973800274DDD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

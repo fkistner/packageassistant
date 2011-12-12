@@ -78,8 +78,8 @@ look at it for more information.
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
     // free last selected package dependencies
-    if(_lastSelectedPackage != nil)
-       [_lastSelectedPackage clearDependencies]; 
+//    if(_lastSelectedPackage != nil)
+//       [_lastSelectedPackage clearDependencies]; 
     
     if(packagesTable.selectedRow != -1)
     {
@@ -88,15 +88,6 @@ look at it for more information.
         
         // progress indicator GO
         [loadingIndicator startAnimation:self];
-        
-        // get the package's dependencies
-        NSArray *deps = [PackageAssistant getPackageDependencies:_lastSelectedPackage.name];
-
-        // load package's dependencies
-        [_lastSelectedPackage setDependencies:deps];
-
-        // check them
-        [PackageAssistant checkDependencies:_lastSelectedPackage fast:false];   
 
         // progress indicator STOP
         [loadingIndicator stopAnimation:self];

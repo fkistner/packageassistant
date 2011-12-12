@@ -7,39 +7,48 @@ look at it for more information.
 */
 
 #import <Cocoa/Cocoa.h>
+#import "PackageDependency.h"
+#import "PackageKit/PKReceipt.h"
 
 enum PackageState { StateUnknown, StateOk, StateBroken };
 
 @interface Package : NSObject
 {
 @private
-    // selected for removal?
-    NSNumber *_remove;
-
     // package name without .pkg
     NSString *_name;
     
-    // package state
-    enum PackageState _state;
-    
-    // package dependency list
-    NSMutableArray *_dependencies;
+    // true if it is an apple package
+    bool _apple;
     
     // package base directory
     NSString *_basedir;
     
-    // true if it is an apple package
-    bool _apple;
+    // package receipt
+//    PKReceipt *_receipt;
+    PKBOM *_bom;
+    
+    // files this package depends on
+    NSMutableArray *_deps;
+    bool _depsUndetermined;
+    
+    // package state
+    enum PackageState _state;
+    
+    // selected for removal?
+    NSNumber *_remove;
 }
 
-@property (readwrite,retain,nonatomic) NSString *name;
-@property (readwrite,retain,nonatomic) NSString *baseDirectory;
-@property (readwrite,retain,nonatomic) NSNumber *remove;
-@property (readwrite,assign,nonatomic) enum PackageState state;
+@property (readonly,retain,nonatomic) NSString *name;
+@property (readonly,assign,nonatomic) bool apple;
+@property (readonly,retain,nonatomic) NSString *baseDirectory;
 @property (readwrite,retain,nonatomic) NSArray *dependencies;
-@property (readwrite,assign,nonatomic) bool apple;
 
-- (id)initWithName:(NSString *)name baseDirectory:(NSString *)basedir apple:(bool)apple;
+@property (readwrite,assign,nonatomic) enum PackageState state;
+@property (readwrite,retain,nonatomic) NSNumber *remove;
+
+- (Package *)initWithReceipt:(PKReceipt *)receipt;
+- (void)determineDependencies;
 - (void)clearDependencies;
 
 @end

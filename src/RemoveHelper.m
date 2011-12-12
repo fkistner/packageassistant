@@ -15,6 +15,7 @@ look at it for more information.
 
 int main(int argc, char *argv[])
 {
+    exit(-1); // FIXME: Don't do nothing stupid!
     long len;
     char *buf;
     char cmd[1024] = {0};

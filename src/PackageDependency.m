@@ -14,7 +14,7 @@ look at it for more information.
 {
     if(self = [super init])
     {
-        _filename = [name substringFromIndex:1];
+        _filename = name;
         _broken = NO;
     }
     return self;

@@ -113,17 +113,20 @@ look at it for more information.
             // force redraw
             [packageLabel display];
             
-            if(pkg.state == StateUnknown)
-            {
-                // check package dependencies
-                NSArray *deps = [PackageAssistant getPackageDependencies:pkg.name];
-                
-                bool error = [PackageAssistant checkDependenciesArray:deps basedir:pkg.baseDirectory fast:true];
-                if(error)
-                    pkg.state = StateBroken;
-                else
-                    pkg.state = StateOk;
-            }
+//            if(pkg.state == StateUnknown)
+//            {
+//                // check package dependencies
+//                NSArray *deps = [PackageAssistant getPackageDependencies:pkg.name];
+//                
+//                bool error = [PackageAssistant checkDependenciesArray:deps basedir:pkg.baseDirectory fast:true];
+//                if(error)
+//                    pkg.state = StateBroken;
+//                else
+//                    pkg.state = StateOk;
+//            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [pkg determineDependencies];
+            });
         }
         
         // move progress bar
