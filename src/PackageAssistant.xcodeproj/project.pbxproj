@@ -625,7 +625,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = __HELPER_DEBUG__;
 				GCC_STRICT_ALIASING = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				LLVM_LTO = YES;
+				LLVM_LTO = NO;
 				PRODUCT_NAME = PackageAssistant;
 				SDKROOT = "";
 			};
