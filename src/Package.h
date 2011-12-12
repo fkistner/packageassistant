@@ -8,6 +8,8 @@ look at it for more information.
 
 #import <Cocoa/Cocoa.h>
 
+enum PackageState { StateUnknown, StateOk, StateBroken };
+
 @interface Package : NSObject
 {
 @private
@@ -18,7 +20,7 @@ look at it for more information.
     NSString *_name;
     
     // package state
-    int _state;
+    enum PackageState _state;
     
     // package dependency list
     NSMutableArray *_dependencies;
@@ -33,16 +35,11 @@ look at it for more information.
 @property (readwrite,retain,nonatomic) NSString *name;
 @property (readwrite,retain,nonatomic) NSString *baseDirectory;
 @property (readwrite,retain,nonatomic) NSNumber *remove;
+@property (readwrite,assign,nonatomic) enum PackageState state;
 @property (readwrite,retain,nonatomic) NSArray *dependencies;
 @property (readwrite,assign,nonatomic) bool apple;
 
 - (id)initWithName:(NSString *)name baseDirectory:(NSString *)basedir apple:(bool)apple;
 - (void)clearDependencies;
-- (void)setUnknown;
-- (void)setOk;
-- (void)setBroken;
-- (bool)isUnknown;
-- (bool)isOk;
-- (bool)isBroken;
 
 @end

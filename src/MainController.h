@@ -29,8 +29,8 @@ look at it for more information.
 - (IBAction)refresh:(id)sender;
 - (IBAction)doSearch:(id)sender;
 
-- (NSMutableArray*)packages;
-- (void)setPackages:(NSMutableArray*)newPackages;
+@property (readwrite,copy,nonatomic) NSMutableArray* packages;
+
 - (void)tableViewSelectionDidChange:(NSNotification *)notification;
 
 @end

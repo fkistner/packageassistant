@@ -18,9 +18,9 @@ look at it for more information.
 - (void)awakeFromNib
 {
     // register image transformers
-    id pst = [[PackageStateTransformer alloc] init];
-    id dst = [[DependencyStateTransformer alloc] init];
-    id pat = [[PackageAppleTransformer alloc] init];
+    id pst = [PackageStateTransformer new];
+    id dst = [DependencyStateTransformer new];
+    id pat = [PackageAppleTransformer new];
         
     [NSValueTransformer
         setValueTransformer:pst
@@ -52,23 +52,11 @@ look at it for more information.
     return self;
 }
 
-
-- (NSMutableArray*) packages
-{
-    return _packages;
-}
-
-- (void)setPackages:(NSMutableArray*)newPackages
-{
-    if(_packages != newPackages)
-    {
-        _packages = [[NSMutableArray alloc] initWithArray: newPackages];
-    }
-}
+@synthesize packages = _packages;
 
 - (IBAction)refresh:(id)sender
 {
-    [packagesController setContent:[PackageAssistant listPackages]];
+    packagesController.content = [PackageAssistant listPackages];
 }
 
 - (IBAction)doSearch:(id)sender
@@ -80,7 +68,7 @@ look at it for more information.
     [self tableViewSelectionDidChange:nil];
     
     // select search field
-    NSTextField *textField = (NSTextField*)sender;
+    NSTextField *textField = sender;
     [textField selectText:self];
 }
 
@@ -91,21 +79,17 @@ look at it for more information.
     // free last selected package dependencies
     if(_lastSelectedPackage != nil)
        [_lastSelectedPackage clearDependencies]; 
-
-    int row = [packagesTable selectedRow];
     
-    if(row != -1)
+    if(packagesTable.selectedRow != -1)
     {
         // set the new package
-        _lastSelectedPackage =
-            [[packagesController selectedObjects] objectAtIndex:0];
+        _lastSelectedPackage = [packagesController.selectedObjects objectAtIndex:0];
         
         // progress indicator GO
         [loading startAnimation:self];
         
         // get the package's dependencies
-        NSArray *deps = [PackageAssistant getPackageDependencies:
-                [_lastSelectedPackage name]];
+        NSArray *deps = [PackageAssistant getPackageDependencies:_lastSelectedPackage.name];
 
         // load package's dependencies
         [_lastSelectedPackage setDependencies:deps];

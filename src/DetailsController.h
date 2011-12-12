@@ -15,6 +15,7 @@ look at it for more information.
 }
 
 - (IBAction)rearrange:(id)sender;
-- (bool)filter;
+
+@property (readonly,assign,nonatomic) bool filter;
 
 @end

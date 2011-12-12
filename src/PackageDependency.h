@@ -15,14 +15,12 @@ look at it for more information.
     NSString *_filename;
     
     // state (DependencyState)
-    bool _state;
+    bool _broken;
 }
 
-- (NSString*)filename;
-- (void)setFilename:(NSString*)name;
-- (void)setOk;
-- (void)setBroken;
-- (bool)isOk;
-- (bool)state;
+- (id)initWithFilename:(NSString*)name;
+
+@property (readonly,retain,nonatomic) NSString *filename;
+@property (readwrite,assign,nonatomic) bool broken;
 
 @end

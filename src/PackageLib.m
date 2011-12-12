@@ -41,9 +41,8 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
     // launch task
     [task launch];
     
-    result = [[outputPipe fileHandleForReading] readDataToEndOfFile];
-    rawoutput = [[NSString alloc] initWithData: result
-                encoding: NSASCIIStringEncoding];
+    result = [outputPipe.fileHandleForReading readDataToEndOfFile];
+    rawoutput = [[NSString alloc] initWithData:result encoding:NSASCIIStringEncoding];
 
 
     return rawoutput;
@@ -51,20 +50,16 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
 
 + (NSArray*)listPackages
 {
-    NSFileManager *fm = [NSFileManager defaultManager];
-    NSDirectoryEnumerator *direnum = [fm enumeratorAtPath:receiptsDirectory];
-    
-    NSString *file;
+    NSDirectoryEnumerator *direnum = [NSFileManager.defaultManager enumeratorAtPath:receiptsDirectory];
     NSMutableArray *ret = [NSMutableArray new];
 
-    while(file = [direnum nextObject])
+    for(NSString *file in direnum)
     {
-        if ([[file pathExtension] isEqualToString: @"pkg"])
+        if ([file.pathExtension isEqualToString:@"pkg"])
         {
             @autoreleasepool {
                 // get the extension out
-                NSString *name = [[NSString alloc] initWithString:
-                    [file substringToIndex:[file length] - 4]];
+                NSString *name = [[NSString alloc] initWithString:[file substringToIndex:file.length - 4]];
                 
                 // get the base directory (where the package was installed)
                 NSString *basedir = [PackageAssistant getPackageBaseDir:name];
@@ -90,44 +85,36 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
     NSMutableArray *ret = [NSMutableArray new];
     
     // package bom file
-    NSString *file = [receiptsDirectory stringByAppendingFormat:@"/%@%@",
-        pkg, bomFile];
+    NSString *file = [receiptsDirectory stringByAppendingFormat:@"/%@%@", pkg, bomFile];
     
     // arguments to run lsbom
     NSArray *args = [[NSArray alloc] initWithObjects:@"-s", @"-f", file, nil];
     
     // run lsbom and save output
-    NSString *output = [[NSString alloc] initWithString:
-        [PackageAssistant getOutput:bomCommand arguments:args]];
+    NSString *output = [[NSString alloc] initWithString:[PackageAssistant getOutput:bomCommand arguments:args]];
     
     // separate the output in files
-    NSArray *files = [[NSArray alloc] initWithArray:
-        [output componentsSeparatedByString:@"\n"]];
+    NSArray *files = [[NSArray alloc] initWithArray:[output componentsSeparatedByString:@"\n"]];
     
     // create a dependency object for each file
-    int i;
-    for(i = 0; i < [files count]; ++i)
+    for (NSString *filename in files)
     {
-        if([[files objectAtIndex:i] length] > 0)
+        if(filename.length > 0)
         {
-            PackageDependency *dep = [PackageDependency new];
-            
-            [dep setFilename:[files objectAtIndex:i]];
-            [ret addObject:dep];
-            
+            PackageDependency *dep = [[PackageDependency alloc] initWithFilename:filename];
+            [ret addObject:dep]; 
         }
     }
     
     return ret;
 }
 
-+ (bool)checkDependencies:(Package*)pkg fast:(bool)f
++ (bool)checkDependencies:(Package*)pkg fast:(bool)fast
 {
-    bool error = [PackageAssistant checkDependenciesArray:[pkg dependencies]
-        basedir:[pkg baseDirectory] fast:f];
-        
+    bool error = [PackageAssistant checkDependenciesArray:pkg.dependencies basedir:pkg.baseDirectory fast:fast];
+
     if(error)
-        [pkg setBroken];
+        pkg.state = StateBroken;
         
     return error;
 }
@@ -144,21 +131,16 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
         PackageDependency *thisDep = [deps objectAtIndex:i];
         
         // check file existance appending base dir to the dependency
-        NSString *filetocheck = [dir
-            stringByAppendingString:[thisDep filename]];
-        bool exists = [fm fileExistsAtPath:filetocheck];
+        NSString *filetocheck = [dir stringByAppendingString:thisDep.filename];
         
         // set dependency state
-        if(exists)
+        bool broken = ![fm fileExistsAtPath:filetocheck];
+        [thisDep setBroken:broken];
+        if(broken)
         {
-            [thisDep setOk];
-        }
-        else
-        {
-            [thisDep setBroken];
             error = true;
             if(fast)
-                return error;
+                break;
         }
     }
     
@@ -167,8 +149,7 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
 
 + (NSString*)getPackageBaseDir:(NSString*)name
 {
-    NSString *plist = [receiptsDirectory stringByAppendingFormat:@"/%@%@",
-        name, infoFile];
+    NSString *plist = [receiptsDirectory stringByAppendingFormat:@"/%@%@", name, infoFile];
         
     // load property list
     NSData *plistData = [NSData dataWithContentsOfFile:plist];
@@ -187,7 +168,7 @@ static NSString *infoFile = @".pkg/Contents/Info.plist";
     }
 
     NSString *tmpdir = [plistdic objectForKey:@"IFPkgRelocatedPath"];
-    return [tmpdir substringWithRange:NSMakeRange(1, [tmpdir length] - 2)];
+    return [tmpdir substringWithRange:NSMakeRange(1, tmpdir.length - 2)];
 }
 
 + (bool)isApplePackage:(NSString*)name

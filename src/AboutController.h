@@ -7,7 +7,7 @@
 - (IBAction)aboutClose:(id)sender;
 - (IBAction)aboutOpen:(id)sender;
 
-- (NSString*)credits;
-- (NSString*)version;
+@property (readonly,nonatomic) NSString* credits;
+@property (readonly,nonatomic) NSString* version;
 
 @end

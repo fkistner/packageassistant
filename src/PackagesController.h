@@ -8,12 +8,13 @@ look at it for more information.
 
 #import <Cocoa/Cocoa.h>
 #import <Foundation/Foundation.h>
+#import "Package.h"
 
 @interface PackagesController : NSArrayController {
     NSString *_searchString;
 }
 
-- (NSString*)searchString;
+@property (readwrite,copy,nonatomic) NSString* searchString;
 - (IBAction)search:(id)sender;
 
 @end

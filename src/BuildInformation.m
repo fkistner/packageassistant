@@ -13,13 +13,12 @@ NSString *build_id = @"$Id$";
 
 @implementation BuildInformation
 
-+ (NSString*) getBundleVersion
++ (NSString*) bundleVersion
 {
-    return [[[NSBundle mainBundle] infoDictionary]
-        objectForKey:@"CFBundleVersion"];
+    return [NSBundle.mainBundle.infoDictionary objectForKey:@"CFBundleVersion"];
 }
 
-+ (NSString*) getSourceRevision
++ (NSString*) sourceRevision
 {
     //NSString *revnum = [build_revision substringFromIndex:11];
     //return [revnum substringToIndex:([revnum length] - 2)];

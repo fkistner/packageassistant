@@ -12,7 +12,7 @@ look at it for more information.
 @interface BuildInformation : NSObject {
 }
 
-+ (NSString*) getBundleVersion;
-+ (NSString*) getSourceRevision;
++ (NSString*) bundleVersion;
++ (NSString*) sourceRevision;
 
 @end

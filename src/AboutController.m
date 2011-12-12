@@ -16,15 +16,14 @@
 
 - (NSString*)credits
 {
-    return [[[NSBundle mainBundle] resourcePath]
-        stringByAppendingString:@"/credits.rtf"];
+    return [NSBundle.mainBundle.resourcePath stringByAppendingString:@"/credits.rtf"];
 }
 
 - (NSString*)version
 {
     // setup version text
-    NSString *bundlver = [BuildInformation getBundleVersion];
-    NSString *revnum = [BuildInformation getSourceRevision];
+    NSString *bundlver = BuildInformation.bundleVersion;
+    NSString *revnum = BuildInformation.sourceRevision;
     return [NSString stringWithFormat:@"Version %@r%@", bundlver, revnum];
 }
 

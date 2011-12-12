@@ -6,12 +6,12 @@ You should have a LICENSE file along with this distribution
 look at it for more information.
 */
 
-#import "PackageLib.h"
-#import "PackageDependency.h"
-
 #import <stdio.h>
 #import <string.h>
 #import <Cocoa/Cocoa.h>
+
+#import "PackageLib.h"
+#import "PackageDependency.h"
 
 int main(int argc, char *argv[])
 {
@@ -30,8 +30,7 @@ int main(int argc, char *argv[])
             
             buf = malloc(len);
             read(fileno(stdin), buf, len);
-            NSString *objcname = [NSString stringWithCString:buf
-                encoding:NSUTF8StringEncoding];
+            NSString *objcname = [NSString stringWithUTF8String:buf];
 #ifdef __HELPER_DEBUG__
             NSLog(@"About to delete: %@", objcname);
 #endif
@@ -41,8 +40,10 @@ int main(int argc, char *argv[])
             NSMutableArray *deps = [NSMutableArray arrayWithArray:pdeps];
 
             [deps sortUsingComparator:^NSComparisonResult(id a, id b) {
-                NSUInteger aLength = [[a filename] length];
-                NSUInteger bLength = [[b filename] length];
+                PackageDependency *depA = a;
+                PackageDependency *depB = b;
+                NSUInteger aLength = depA.filename.length;
+                NSUInteger bLength = depB.filename.length;
                 if(aLength == bLength)
                 {
                     return NSOrderedSame;
@@ -57,13 +58,9 @@ int main(int argc, char *argv[])
                 }
             }];
             
-            int i;
-            for(i = 0; i < [deps count]; i++)
+            for(PackageDependency *dep in deps)
             {
-                sprintf(cmd, "/bin/rm -f \"%s%s\"",
-                    [basedir cStringUsingEncoding:NSUTF8StringEncoding],
-                    [[[deps objectAtIndex:i] filename]
-                        cStringUsingEncoding:NSUTF8StringEncoding]);
+                sprintf(cmd, "/bin/rm -f \"%s%s\"", basedir.UTF8String, dep.filename.UTF8String);
 #ifdef __HELPER_DEBUG__
                 NSLog(@"About to execute: %s", cmd);
 #endif
@@ -71,9 +68,7 @@ int main(int argc, char *argv[])
             }
             
             // remove receipt
-            sprintf(cmd, "/bin/rm -rf \"%s\"",
-                [[PackageAssistant getPackageFile: objcname]
-                        cStringUsingEncoding:NSUTF8StringEncoding]);
+            sprintf(cmd, "/bin/rm -rf \"%s\"", [PackageAssistant getPackageFile:objcname].UTF8String);
 #ifdef __HELPER_DEBUG__                
             NSLog(@"About to execute: %s", cmd);
 #endif

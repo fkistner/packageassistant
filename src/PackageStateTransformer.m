@@ -6,6 +6,7 @@ You should have a LICENSE file along with this distribution
 look at it for more information.
 */
 
+#import "Package.h"
 #import "PackageStateTransformer.h"
 
 @implementation PackageStateTransformer
@@ -23,19 +24,20 @@ look at it for more information.
 - (id)transformedValue:(id)beforeObject
 {
     if (beforeObject == nil) return nil;
-    int state = [beforeObject intValue];
     
+    NSNumber *num = beforeObject;
+    enum PackageState state = num.intValue;
     switch(state)
     {
-        case 0:
+        case StateUnknown:
             return [NSImage imageNamed:@"yellow"];
             break;
             
-        case 1:
+        case StateOk:
             return [NSImage imageNamed:@"green"];
             break;
         
-        case 2:
+        case StateBroken:
             return [NSImage imageNamed:@"red"];
             break;
     }

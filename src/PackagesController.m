@@ -11,18 +11,7 @@ look at it for more information.
 @implementation PackagesController
 
 
-- (NSString*)searchString
-{
-    return _searchString;
-}
-
-- (void)setSearchString:(NSString*)str
-{
-    if (_searchString != str)
-	{
-        _searchString = [str copy];
-    }
-}
+@synthesize searchString = _searchString;
 
 - (IBAction)search:(id)sender
 {
@@ -38,23 +27,19 @@ look at it for more information.
 	}
 	
     NSMutableArray *matchedObjects =
-        [NSMutableArray arrayWithCapacity:[objects count]];
+        [NSMutableArray arrayWithCapacity:objects.count];
 
     // case-insensitive search
-    NSString *lowerSearch = [_searchString lowercaseString];
-
-    id item;    
-	NSEnumerator *oEnum = [objects objectEnumerator];
-    while (item = [oEnum nextObject])
+    NSString *lowerSearch = _searchString.lowercaseString;
+    
+    for(Package *item in objects)
 	{
         @autoreleasepool {
-        NSString *lowerName = [[item valueForKeyPath:@"name"] lowercaseString];
-        
-        if ([lowerName rangeOfString:lowerSearch].location != NSNotFound)
-        {
-            [matchedObjects addObject:item];
-        }
-        
+            if ([item.name.lowercaseString rangeOfString:lowerSearch].location != NSNotFound)
+            {
+                [matchedObjects addObject:item];
+            }
+            
         }
     }
     

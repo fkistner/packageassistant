@@ -24,7 +24,8 @@ look at it for more information.
 {
     if(beforeObject == nil) return nil;
     
-    if([beforeObject boolValue])
+    NSNumber *num = beforeObject;
+    if(num.boolValue)
     {
         return [NSImage imageNamed:@"apple"];
     }

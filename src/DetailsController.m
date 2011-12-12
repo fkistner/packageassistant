@@ -19,34 +19,19 @@ look at it for more information.
 
 - (NSArray *)arrangeObjects:(NSArray *)objects
 {	
-    NSMutableArray *matchedObjects =
-        [NSMutableArray arrayWithCapacity:[objects count]];
-
-    id item;
-	NSEnumerator *oEnum = [objects objectEnumerator];
-    while(item = [oEnum nextObject])
-	{
-        if([item isKindOfClass:[PackageDependency class]] && _filter)
+    if (_filter) {
+        NSMutableArray *matchedObjects = [NSMutableArray arrayWithCapacity:objects.count];
+        for(PackageDependency *dep in objects)
         {
-            NSNumber *state = [item valueForKeyPath: @"state"];
-            
-            if([state boolValue] == true)
-            {
-                [matchedObjects addObject:item];
-            }
+            if(dep.broken)
+                [matchedObjects addObject:dep];
         }
-        else
-        {
-           [matchedObjects addObject:item];
-        }
+        return [super arrangeObjects:matchedObjects];
+    } else {
+        return [super arrangeObjects:objects];        
     }
-    
-    return [super arrangeObjects:matchedObjects];
 }
 
-- (bool)filter
-{
-    return _filter;
-}
+@synthesize filter = _filter;
 
 @end

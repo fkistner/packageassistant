@@ -17,8 +17,8 @@ look at it for more information.
         _name = name;
         _basedir = basedir;
         _remove = [NSNumber numberWithBool:false];
-        _state = 0;
-        _apple = false;
+        _state = StateUnknown;
+        _apple = apple;
         _dependencies = [NSMutableArray new];
     }
     
@@ -28,7 +28,7 @@ look at it for more information.
 @synthesize name = _name;
 @synthesize baseDirectory = _basedir;
 @synthesize remove = _remove;
-// handle state differently
+@synthesize state = _state;
 @synthesize dependencies = _dependencies;
 @synthesize apple = _apple;
 
@@ -38,50 +38,19 @@ look at it for more information.
     _dependencies = dependencies;
     
     // update package state
-    int i = 0;
-    int total = [_dependencies count];
-    [self setOk];
-    while(i < total && [self isOk])
+    self.state = StateOk;
+    for (Package *pkg in _dependencies)
     {
-        if(![[_dependencies objectAtIndex:i] isOk])
-            [self setBroken];
-        i++;
+        if(pkg.state == StateBroken){
+            self.state = StateBroken;
+            break;
+        }
     }
 }
 
 - (void)clearDependencies
 {
     [_dependencies removeAllObjects];
-}
-
-- (bool)isUnknown
-{
-    return (_state == 0);
-}
-
-- (bool)isOk
-{
-    return (_state == 1);
-}
-
-- (bool)isBroken
-{
-    return (_state == 2);
-}
-
-- (void)setUnknown
-{
-    _state = 0;
-}
-
-- (void)setOk
-{
-    _state = 1;
-}
-
-- (void)setBroken
-{
-    _state = 2;
 }
 
 @end

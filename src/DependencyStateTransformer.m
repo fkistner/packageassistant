@@ -23,19 +23,15 @@ look at it for more information.
 - (id)transformedValue:(id)beforeObject
 {
     if (beforeObject == nil) return nil;
-    int state = [beforeObject intValue];
     
-    switch(state)
+    NSNumber *num = beforeObject;
+    if(num.boolValue)
     {
-        // ok
-        case 0:
-            return [NSImage imageNamed:@"check"];
-            break;
-            
         // missing
-        case 1:
-            return [NSImage imageNamed:@"warning"];
-            break;
+        return [NSImage imageNamed:@"warning"];
+    } else {
+        // ok
+        return [NSImage imageNamed:@"check"];
     }
     
     return nil;

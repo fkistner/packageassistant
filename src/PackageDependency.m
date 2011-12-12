@@ -10,46 +10,17 @@ look at it for more information.
 
 @implementation PackageDependency
 
-- (id)init
+- (id)initWithFilename:(NSString*)name
 {
     if(self = [super init])
     {
-        _filename = [[NSString alloc] initWithString:@"Unknown"];
-        _state = 0;
+        _filename = [name substringFromIndex:1];
+        _broken = NO;
     }
-    
     return self;
 }
 
-
-- (NSString*)filename
-{
-    return _filename;
-}
-
-- (bool)state
-{
-    return _state;
-}
-
-- (bool)isOk
-{
-    return (_state == 0);
-}
-
-- (void)setOk
-{
-    _state = false;
-}
-
-- (void)setBroken
-{
-    _state = true;
-}
-
-- (void)setFilename:(NSString*)name
-{
-    _filename = [[NSString alloc] initWithString: [name substringFromIndex:1]];
-}
+@synthesize filename = _filename;
+@synthesize broken = _broken;
 
 @end
