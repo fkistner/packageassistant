@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		17B2A238149639CD00773687 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
+		17B2A239149639D400773687 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97324FDCFA39411CA2CEA /* AppKit.framework */; };
+		17B2A23D14963A3B00773687 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
+		17B2A23E14963A4200773687 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97324FDCFA39411CA2CEA /* AppKit.framework */; };
 		17E6EB9914955E8600201200 /* AssistantResources.nib in Resources */ = {isa = PBXBuildFile; fileRef = 17E6EB9714955E8600201200 /* AssistantResources.nib */; };
 		771B47890D8565C20050DC1C /* PackagesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 771B47880D8565C20050DC1C /* PackagesController.m */; };
 		771C7E690C4C756800E5070D /* PackageStateTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 771C7E680C4C756800E5070D /* PackageStateTransformer.m */; };
@@ -140,6 +144,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7765E7170D3EDEB6004C23BA /* Cocoa.framework in Frameworks */,
+				17B2A238149639CD00773687 /* Foundation.framework in Frameworks */,
+				17B2A239149639D400773687 /* AppKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +155,8 @@
 			files = (
 				77F12EC90D3FB58000274DDD /* PackageLib.dylib in Frameworks */,
 				77F12EC60D3FB57400274DDD /* Cocoa.framework in Frameworks */,
+				17B2A23D14963A3B00773687 /* Foundation.framework in Frameworks */,
+				17B2A23E14963A4200773687 /* AppKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,15 +516,9 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
 				);
 				MACH_O_TYPE = mh_dylib;
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				PRODUCT_NAME = PackageLib;
 				SKIP_INSTALL = NO;
-				STRIP_INSTALLED_PRODUCT = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
 		};
@@ -530,12 +532,6 @@
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INSTALL_PATH = "@executable_path";
 				MACH_O_TYPE = mh_dylib;
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				PRODUCT_NAME = PackageLib;
 				SKIP_INSTALL = NO;
 				STRIP_INSTALLED_PRODUCT = YES;
@@ -551,12 +547,6 @@
 				INSTALL_GROUP = "$(USER)";
 				INSTALL_OWNER = "$(USER)";
 				INSTALL_PATH = "$(HOME)";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				PRODUCT_NAME = RemoveHelper;
 				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = YES;
@@ -572,12 +562,6 @@
 				INSTALL_GROUP = "$(USER)";
 				INSTALL_OWNER = "$(USER)";
 				INSTALL_PATH = "$(HOME)";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
 				PRODUCT_NAME = RemoveHelper;
 				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = YES;
