@@ -28,6 +28,7 @@
     if (self = [super init])
     {
         _queue = [[NSOperationQueue alloc] init];
+        _queue.maxConcurrentOperationCount = 1;
     }
     return self;
 }
@@ -40,14 +41,14 @@
     
     for(PKReceipt *receipt in receipts)
     {
-        [queue addOperationWithBlock:^{
+//        [queue addOperationWithBlock:^{
             // create package
             Package *pkg = [[Package alloc] initWithReceipt:receipt andQueue:queue];
             
-            [NSOperationQueue.mainQueue addOperationWithBlock:^{
+//            [NSOperationQueue.mainQueue addOperationWithBlock:^{
                 [ret addObject:pkg];
-            }];
-        }];
+//            }];
+//        }];
     }
     
     return ret;
