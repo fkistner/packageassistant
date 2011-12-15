@@ -22,7 +22,7 @@
 - (NSString*)version
 {
     // setup version text
-    return [NSString stringWithFormat:@"Version %@r%@",
+    return [NSString stringWithFormat:@"Version %@-%@",
             BuildInformation.bundleVersion,
             BuildInformation.sourceRevision];
 }
