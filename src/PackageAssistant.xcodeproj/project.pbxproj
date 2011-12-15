@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		170205451498D3A80071F688 /* PackageDetermineDependencies.h in Headers */ = {isa = PBXBuildFile; fileRef = 170205431498D3A80071F688 /* PackageDetermineDependencies.h */; };
+		170205461498D3A80071F688 /* PackageDetermineDependencies.m in Sources */ = {isa = PBXBuildFile; fileRef = 170205441498D3A80071F688 /* PackageDetermineDependencies.m */; };
+		1702054D1499328C0071F688 /* BOM.h in Headers */ = {isa = PBXBuildFile; fileRef = 1702054C1499328C0071F688 /* BOM.h */; };
 		17B2A238149639CD00773687 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
 		17B2A239149639D400773687 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97324FDCFA39411CA2CEA /* AppKit.framework */; };
 		17B2A23C14963A2200773687 /* PackageKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B2A23A149639FE00773687 /* PackageKit.framework */; };
@@ -83,6 +86,9 @@
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		170205431498D3A80071F688 /* PackageDetermineDependencies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PackageDetermineDependencies.h; sourceTree = "<group>"; };
+		170205441498D3A80071F688 /* PackageDetermineDependencies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PackageDetermineDependencies.m; sourceTree = "<group>"; };
+		1702054C1499328C0071F688 /* BOM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOM.h; sourceTree = "<group>"; };
 		17B2A23A149639FE00773687 /* PackageKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PackageKit.framework; path = /System/Library/PrivateFrameworks/PackageKit.framework; sourceTree = "<absolute>"; };
 		17B2A2641496484600773687 /* PKReceipt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PKReceipt.h; path = PackageKit/PKReceipt.h; sourceTree = "<group>"; };
 		17B2A26514964D4000773687 /* PKBOM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PKBOM.h; path = PackageKit/PKBOM.h; sourceTree = "<group>"; };
@@ -173,12 +179,15 @@
 			isa = PBXGroup;
 			children = (
 				17B2A2621496481900773687 /* PackageKit */,
+				1702054C1499328C0071F688 /* BOM.h */,
 				77D52D890BB01BE800331AB5 /* PackageLib.h */,
 				77D52D8A0BB01BE800331AB5 /* PackageLib.m */,
 				77861E7E0C3EC88F001AD945 /* Package.h */,
 				77861E7F0C3EC88F001AD945 /* Package.m */,
 				17B2A2671496527200773687 /* PackageDependency.h */,
 				17B2A2681496527200773687 /* PackageDependency.m */,
+				170205431498D3A80071F688 /* PackageDetermineDependencies.h */,
+				170205441498D3A80071F688 /* PackageDetermineDependencies.m */,
 			);
 			name = PackageLib;
 			sourceTree = "<group>";
@@ -324,6 +333,8 @@
 			files = (
 				7765E7220D3EDEDD004C23BA /* Package.h in Headers */,
 				7765E6EE0D3EDDDA004C23BA /* PackageLib.h in Headers */,
+				170205451498D3A80071F688 /* PackageDetermineDependencies.h in Headers */,
+				1702054D1499328C0071F688 /* BOM.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +451,7 @@
 				7765E7250D3EDEEB004C23BA /* Package.m in Sources */,
 				7765E6EF0D3EDDDF004C23BA /* PackageLib.m in Sources */,
 				17B2A26A14965B7200773687 /* PackageDependency.m in Sources */,
+				170205461498D3A80071F688 /* PackageDetermineDependencies.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

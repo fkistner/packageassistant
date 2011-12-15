@@ -12,10 +12,11 @@ look at it for more information.
 @interface PackageAssistant : NSObject
 {
     @private   
-    dispatch_queue_t _queue;
+    NSOperationQueue *_queue;
 }
 
 + (id)sharedInstance;
 - (NSArray*)listPackages;
+- (void)cancel;
 
 @end

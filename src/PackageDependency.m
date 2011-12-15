@@ -10,12 +10,12 @@ look at it for more information.
 
 @implementation PackageDependency
 
-- (id)initWithFilename:(NSString*)name
+- (id)initWithFilename:(NSString*)name andState:(bool)broken
 {
     if(self = [super init])
     {
         _filename = name;
-        _broken = NO;
+        _broken = broken;
     }
     return self;
 }

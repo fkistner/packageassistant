@@ -23,33 +23,39 @@
     return p;
 }
 
--(id)init
+- (id)init
 {
-    _queue = dispatch_queue_create("Packages", DISPATCH_QUEUE_CONCURRENT);
+    if (self = [super init])
+    {
+        _queue = [[NSOperationQueue alloc] init];
+    }
+    return self;
 }
 
 - (NSArray*)listPackages
 {
+    __weak NSOperationQueue *queue = _queue;
     NSArray *receipts = [PKReceipt receiptsOnVolumeAtPath:@"/"];
     NSMutableArray *ret = [NSMutableArray arrayWithCapacity:receipts.count];
     
     for(PKReceipt *receipt in receipts)
     {
-        // create package
-        Package *pkg = [[Package alloc] initWithReceipt:receipt andTargetQueue:_queue];
-        
-        [pkg determineState];
-        
-        // add the package
-        [ret addObject:pkg];
+        [queue addOperationWithBlock:^{
+            // create package
+            Package *pkg = [[Package alloc] initWithReceipt:receipt andQueue:queue];
+            
+            [NSOperationQueue.mainQueue addOperationWithBlock:^{
+                [ret addObject:pkg];
+            }];
+        }];
     }
     
     return ret;
 }
 
--(void)cancel
+- (void)cancel
 {
-    
+    [_queue cancelAllOperations];
 }
 
 @end

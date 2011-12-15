@@ -18,9 +18,9 @@ look at it for more information.
     bool _broken;
 }
 
-- (id)initWithFilename:(NSString*)name;
+- (id)initWithFilename:(NSString*)name andState:(bool)broken;
 
 @property (readonly,retain,nonatomic) NSString *filename;
-@property (readwrite,assign,nonatomic) bool broken;
+@property (readonly,assign,nonatomic) bool broken;
 
 @end

@@ -34,7 +34,7 @@ look at it for more information.
         // force redraw
         [packageLabel display];
         
-        [pkg determineState];
+        //[pkg determineState];
         
         // move progress bar
         [progress incrementBy:1.0];

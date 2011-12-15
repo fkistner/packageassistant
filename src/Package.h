@@ -7,7 +7,6 @@ look at it for more information.
 */
 
 #import <Cocoa/Cocoa.h>
-#import "PackageDependency.h"
 #import "PackageKit/PKReceipt.h"
 
 enum PackageState { StateUnknown, StateOk, StateBroken };
@@ -24,13 +23,10 @@ enum PackageState { StateUnknown, StateOk, StateBroken };
     // package base directory
     NSString *_basedir;
     
-    // package receipt
-//    PKReceipt *_receipt;
-    PKBOM *_bom;
-    
     // files this package depends on
-    dispatch_queue_t _queue;
-    NSMutableArray *_deps;
+    id <NSFastEnumeration> _rawDeps;
+    NSUInteger _count;
+    NSArray *_deps;
     
     // package state
     enum PackageState _state;
@@ -47,8 +43,6 @@ enum PackageState { StateUnknown, StateOk, StateBroken };
 @property (readwrite,assign,nonatomic) enum PackageState state;
 @property (readwrite,retain,nonatomic) NSNumber *remove;
 
-- (Package *)initWithReceipt:(PKReceipt *)receipt andTargetQueue:(dispatch_queue_t)targetQueue;
-- (void)determineState;
-- (void)clearDependencies;
+- (Package *)initWithReceipt:(PKReceipt *)receipt andQueue:queue;
 
 @end

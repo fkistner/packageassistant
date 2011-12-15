@@ -10,10 +10,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import "PKBOMDirectoryEnumerator.h"
+#import "../BOM.h"
 
 @class NSData;
 
-@interface PKBOM : NSObject
+@interface PKBOM : NSObject < BOM >
 {
     NSData *_bomData;
     struct _BOMBom *_BOMBom;

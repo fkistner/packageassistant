@@ -24,6 +24,7 @@ look at it for more information.
             
     NSMutableArray *_packages;
     Package *_lastSelectedPackage;
+    NSOperationQueue *_defered;
 }
 
 - (IBAction)refresh:(id)sender;

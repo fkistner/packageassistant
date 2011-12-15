@@ -47,6 +47,7 @@ look at it for more information.
     {
         _packages = [NSMutableArray new];
         _lastSelectedPackage = nil;
+        _defered = [NSOperationQueue new];
     }
 
     return self;
@@ -56,7 +57,11 @@ look at it for more information.
 
 - (IBAction)refresh:(id)sender
 {
-    packagesController.content = [PackageAssistant listPackages];
+    PackageAssistant *pa = [PackageAssistant sharedInstance];
+    PackagesController *ctrl = packagesController;
+    [_defered addOperationWithBlock:^{
+        ctrl.content = [pa listPackages];
+    }];
 }
 
 - (IBAction)doSearch:(id)sender
