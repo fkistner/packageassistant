@@ -10,6 +10,8 @@
 		170205451498D3A80071F688 /* PackageDetermineDependencies.h in Headers */ = {isa = PBXBuildFile; fileRef = 170205431498D3A80071F688 /* PackageDetermineDependencies.h */; };
 		170205461498D3A80071F688 /* PackageDetermineDependencies.m in Sources */ = {isa = PBXBuildFile; fileRef = 170205441498D3A80071F688 /* PackageDetermineDependencies.m */; };
 		1702054D1499328C0071F688 /* BOM.h in Headers */ = {isa = PBXBuildFile; fileRef = 1702054C1499328C0071F688 /* BOM.h */; };
+		172C2F3A149A43F20010F156 /* PackageLib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7765E6E40D3EDD96004C23BA /* PackageLib.dylib */; };
+		17B0B8C9149A3EED00D9E865 /* PackageKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B2A23A149639FE00773687 /* PackageKit.framework */; };
 		17B2A238149639CD00773687 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97325FDCFA39411CA2CEA /* Foundation.framework */; };
 		17B2A239149639D400773687 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29B97324FDCFA39411CA2CEA /* AppKit.framework */; };
 		17B2A23C14963A2200773687 /* PackageKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B2A23A149639FE00773687 /* PackageKit.framework */; };
@@ -27,7 +29,6 @@
 		775C884A0BB0BD420029DA65 /* SheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 775C88490BB0BD410029DA65 /* SheetController.m */; };
 		7765E6EE0D3EDDDA004C23BA /* PackageLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 77D52D890BB01BE800331AB5 /* PackageLib.h */; settings = {ATTRIBUTES = (); }; };
 		7765E6EF0D3EDDDF004C23BA /* PackageLib.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D52D8A0BB01BE800331AB5 /* PackageLib.m */; };
-		7765E70E0D3EDE67004C23BA /* PackageLib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7765E6E40D3EDD96004C23BA /* PackageLib.dylib */; };
 		7765E7170D3EDEB6004C23BA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		7765E7220D3EDEDD004C23BA /* Package.h in Headers */ = {isa = PBXBuildFile; fileRef = 77861E7E0C3EC88F001AD945 /* Package.h */; settings = {ATTRIBUTES = (); }; };
 		7765E7250D3EDEEB004C23BA /* Package.m in Sources */ = {isa = PBXBuildFile; fileRef = 77861E7F0C3EC88F001AD945 /* Package.m */; };
@@ -39,7 +40,6 @@
 		77CBE8260E932ACC001F567E /* apple.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 77CBE8250E932ACC001F567E /* apple.tiff */; };
 		77D52D880BB01BD600331AB5 /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77D52D870BB01BD600331AB5 /* MainController.m */; };
 		77F12DCA0D3F97AA00274DDD /* RemoveHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7765E74B0D3EE037004C23BA /* RemoveHelper.m */; };
-		77F12DCF0D3F995E00274DDD /* PackageLib.dylib in Copy Extra Executables */ = {isa = PBXBuildFile; fileRef = 7765E6E40D3EDD96004C23BA /* PackageLib.dylib */; };
 		77F12E700D3FB2E600274DDD /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77F12E6F0D3FB2E600274DDD /* Security.framework */; };
 		77F12EC60D3FB57400274DDD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		77F12EC90D3FB58000274DDD /* PackageLib.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7765E6E40D3EDD96004C23BA /* PackageLib.dylib */; };
@@ -67,20 +67,6 @@
 			remoteInfo = PackageLib;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		77F12DD10D3F996D00274DDD /* Copy Extra Executables */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 6;
-			files = (
-				77F12DCF0D3F995E00274DDD /* PackageLib.dylib in Copy Extra Executables */,
-			);
-			name = "Copy Extra Executables";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -166,9 +152,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7765E70E0D3EDE67004C23BA /* PackageLib.dylib in Frameworks */,
+				172C2F3A149A43F20010F156 /* PackageLib.dylib in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				77F12E700D3FB2E600274DDD /* Security.framework in Frameworks */,
+				17B0B8C9149A3EED00D9E865 /* PackageKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,6 +182,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				17B2A23A149639FE00773687 /* PackageKit.framework */,
 				77F12E6F0D3FB2E600274DDD /* Security.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 			);
@@ -204,7 +192,6 @@
 		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				17B2A23A149639FE00773687 /* PackageKit.framework */,
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
 				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
@@ -382,7 +369,6 @@
 				8D1107290486CEB800E47090 /* Resources */,
 				8D11072C0486CEB800E47090 /* Sources */,
 				8D11072E0486CEB800E47090 /* Frameworks */,
-				77F12DD10D3F996D00274DDD /* Copy Extra Executables */,
 			);
 			buildRules = (
 			);
@@ -528,13 +514,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INSTALL_PATH = "@executable_path";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
-				);
-				MACH_O_TYPE = mh_dylib;
+				MACH_O_TYPE = staticlib;
 				PRODUCT_NAME = PackageLib;
-				SKIP_INSTALL = NO;
+				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
@@ -552,9 +534,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
 				INSTALL_PATH = "@executable_path";
-				MACH_O_TYPE = mh_dylib;
+				MACH_O_TYPE = staticlib;
 				PRODUCT_NAME = PackageLib;
-				SKIP_INSTALL = NO;
+				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = YES;
 			};
 			name = Release;
@@ -593,6 +575,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"",
+				);
 				INFOPLIST_FILE = "PackageAssistant-Info.plist";
 				INSTALL_PATH = "$(HOME)";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
@@ -606,6 +592,10 @@
 		C01FCF4C08A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks\"",
+				);
 				INFOPLIST_FILE = "PackageAssistant-Info.plist";
 				INSTALL_PATH = "$(HOME)";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
